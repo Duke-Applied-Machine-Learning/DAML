@@ -16,10 +16,10 @@ const TechIcon: React.FC<TechIconProps> = ({ src, alt }) => (
       src={src} 
       alt={alt} 
       width={160} 
-      height={160} 
+      height={60} 
       priority={true}
       loading="eager"
-      objectFit="contain" 
+      style={{ height: "60px", width: "auto", objectFit: "contain" }}
     />
   </div>
 );
@@ -49,7 +49,7 @@ const PartnerWithUs: React.FC = () => {
         .partnerPage :global(*) { box-sizing: border-box; }
         .partnerPage a { text-decoration: none; color: inherit; }
         /* scope color variables to .partnerPage only so globals (nav, body) stay unchanged */
-        .partnerPage { --bg-dark: rgb(8, 18, 49); --bg-darker: #040b1f; --text-light: #E2E8F0; --accent-blue: #3B82F6; --border: rgba(255,255,255,0.1); --shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .partnerPage { --bg-dark: rgb(8, 18, 49); --bg-darker: #040b1f; --text-light: #E2E8F0; --accent-blue: #3B82F6; --border: rgba(255,255,255,0.1); --shadow: 0 2px 4px rgba(0,0,0,0.1); font-family: var(--site-hero-font-family); color: #e2e8f0; }
 
         .partnerPage .animated-bg {
           position: absolute;
@@ -68,26 +68,92 @@ const PartnerWithUs: React.FC = () => {
 
         .partnerPage section { padding: 4rem 2rem; position: relative; z-index: 1; }
         .partnerPage .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-        .partnerPage h1, .partnerPage h2 { color: #fff; margin-bottom: 1rem; }
-        .partnerPage h1 { font-size: 3rem; font-weight: 800; }
-        .partnerPage h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; }
-        .partnerPage p { margin-bottom: 1rem; max-width: 65ch; color: var(--text-light); }
-        .partnerPage .btn { display: inline-block; background: var(--accent-blue); color: #fff; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 15px rgba(59,130,246,0.5); }
-        .partnerPage .btn:hover { background: #2563eb; transform: translateY(-2px); box-shadow: 0 0 25px rgba(59,130,246,0.8); }
 
-        .partnerPage .hero { display: flex; align-items: center; gap: 2rem; min-height: 60vh; }
-        .partnerPage .hero-content { flex: 0 0 60%; }
-        .partnerPage .hero-image { flex: 0 0 40%; height: 400px; border: 1px solid var(--border); position:relative; overflow:hidden; }
+        .partnerPage .hero-section {
+          padding: var(--site-hero-padding);
+          background: var(--site-hero-background);
+          color: #ffffff;
+          position: relative;
+          overflow: hidden;
+          font-family: var(--site-hero-font-family);
+        }
+        .partnerPage .hero-section .container {
+          max-width: var(--site-hero-max-width);
+          margin: 0 auto;
+          display: grid;
+          gap: var(--site-hero-gap);
+        }
+        .partnerPage .hero-layout {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+          gap: 48px;
+          align-items: center;
+        }
+        .partnerPage .hero-content {
+          display: grid;
+          gap: 18px;
+        }
+        .partnerPage .hero-heading {
+          font-size: var(--site-hero-heading-size);
+          font-weight: var(--site-hero-heading-weight);
+          line-height: var(--site-hero-heading-line-height);
+          margin: 0;
+          letter-spacing: 0.2px;
+        }
+        .partnerPage .hero-subheading {
+          font-size: var(--site-hero-subheading-size);
+          line-height: var(--site-hero-subheading-line-height);
+          color: var(--site-hero-subheading-color);
+          max-width: var(--site-hero-text-max-width);
+          margin: 0;
+        }
+        .partnerPage .hero-actions {
+          display: flex;
+          gap: 16px;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+        .partnerPage .hero-cta {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--site-cta-background);
+          color: var(--site-cta-color);
+          padding: var(--site-cta-padding);
+          border-radius: var(--site-cta-radius);
+          font-size: var(--site-cta-font-size);
+          font-weight: var(--site-cta-font-weight);
+          box-shadow: var(--site-cta-shadow);
+          transition: transform 0.22s ease, box-shadow 0.22s ease;
+          border: none;
+          cursor: pointer;
+          white-space: nowrap;
+        }
+        .partnerPage .hero-cta:hover {
+          transform: translateY(-3px);
+          box-shadow: var(--site-cta-shadow-hover);
+        }
+
+        .partnerPage .hero-image {
+          border: 1px solid var(--border);
+          position: relative;
+          overflow: hidden;
+          border-radius: 24px;
+          min-height: 340px;
+        }
         .partnerPage .hero-image::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(59,130,246,0.2) 0%, transparent 70%); animation: pulse 4s ease-in-out infinite; }
         @keyframes pulse { 0%,100% { opacity:0.5; } 50% { opacity:1; } }
 
         .partnerPage .cards { display:grid; gap:2rem; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); }
-        .partnerPage .card { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius:16px; padding:2rem; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; position:relative; overflow:hidden; }
+        .partnerPage .card { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius:16px; padding:2rem; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; position:relative; overflow:hidden; display: grid; gap: 12px; }
         .partnerPage .card::before { content:''; position:absolute; inset:0; border-radius:16px; padding:1px; background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent); pointer-events:none; }
         .partnerPage .card:hover { transform: translateY(-4px); box-shadow: 0 0 20px rgba(59,130,246,0.3); }
         .partnerPage .card h3 { margin-bottom: 0.75rem; color:#fff; font-size:1.5rem; }
-        .partnerPage .card ul { list-style:none; margin-top:1rem; }
-        .partnerPage .card li::before { content: "✓"; color: var(--accent-blue); font-weight:bold; margin-right:0.5rem; }
+        .partnerPage .card p { margin: 0; color: var(--text-light); line-height: 1.6; }
+        .partnerPage .card p + ul { margin-top: 1rem; }
+        .partnerPage .card ul { list-style:none; margin-top:1rem; padding:0; display:grid; gap:10px; }
+        .partnerPage .card li { display:flex; align-items:flex-start; gap:0.5rem; color: var(--text-light); line-height: 1.6; }
+        .partnerPage .card li::before { content: "✓"; color: var(--accent-blue); font-weight:bold; margin-top:2px; }
 
         .partnerPage .tech-scroll {
           width: 100%;
@@ -99,7 +165,7 @@ const PartnerWithUs: React.FC = () => {
 
         .partnerPage .tech-scroll-inner {
           display: flex;
-          gap: 3rem;
+          gap: 40px;
           animation: scroll-left 30s linear infinite;
           align-items: center;
         }
@@ -109,22 +175,28 @@ const PartnerWithUs: React.FC = () => {
         }
 
         .partnerPage .tech-icon { 
-          flex: 0 0 200px;
-          width: 200px; 
-          height: 200px; 
-          background: rgba(255,255,255,0.05); 
+          flex: 0 0 auto;
+          min-width: 140px; 
+          min-height: 96px; 
+          background: rgba(255,255,255,0.08); 
           backdrop-filter: blur(10px); 
-          border-radius: 16px; 
+          border-radius: 20px; 
           display: flex; 
           align-items: center; 
           justify-content: center; 
           box-shadow: var(--shadow); 
           transition: transform 0.2s, box-shadow 0.2s; 
           border: 1px solid var(--border); 
-          padding: 1.5rem;
+          padding: 16px 28px;
           overflow: hidden;
         }
-        .partnerPage .tech-icon:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(59,130,246,0.4); }
+        .partnerPage .tech-icon:hover { transform: translateY(-4px); box-shadow: 0 0 22px rgba(59,130,246,0.35); }
+        .partnerPage .tech-icon :global(img) {
+          height: 60px;
+          width: auto;
+          max-width: 200px;
+          object-fit: contain;
+        }
         
         @keyframes scroll-left {
           0% { transform: translateX(0); }
@@ -133,11 +205,17 @@ const PartnerWithUs: React.FC = () => {
 
         .partnerPage footer { background: var(--bg-darker); color:#fff; padding:2rem; text-align:center; font-size:0.875rem; }
 
+        @media (max-width: 1024px) {
+          .partnerPage .hero-layout {
+            grid-template-columns: 1fr;
+          }
+          .partnerPage .hero-image {
+            min-height: 280px;
+          }
+        }
         @media (max-width:768px) {
-          .partnerPage .hero { flex-direction: column; }
-          .partnerPage .hero-content, .partnerPage .hero-image { flex: 1 1 100%; }
-          .partnerPage h1 { font-size: 2.5rem; }
-          .partnerPage h2 { font-size: 2rem; }
+          .partnerPage .hero-heading { font-size: 46px; }
+          .partnerPage .hero-subheading { font-size: 18px; }
         }
 
         /* Improve contrast for light sections */
@@ -151,20 +229,22 @@ const PartnerWithUs: React.FC = () => {
       <div className="partnerPage">
 
       {/* Hero */}
-      <section style={{ padding: '120px 6vw 90px', background: 'linear-gradient(135deg, rgba(9, 21, 53, 0.95), rgba(26, 53, 118, 0.88), rgba(59, 130, 246, 0.7))', color: 'white' }}>
+      <section className="hero-section">
         <div className="animated-bg">
           <div className="network-line" style={{ top: '20%' }} />
           <div className="network-line" style={{ top: '50%', animationDelay: '3s' }} />
           <div className="network-line" style={{ top: '80%', animationDelay: '6s' }} />
         </div>
         <div className="container">
-          <div className="hero">
+          <div className="hero-layout">
             <div className="hero-content">
-              <h1>Partner With Us</h1>
-              <p>
+              <h1 className="hero-heading">Partner With Us</h1>
+              <p className="hero-subheading">
                 We&apos;re happy to partner with any company who is interested in building AI solutions or products, expand education initiatives, and/or outreach to our members for opportunities. Partnering with us means to enhance the range of opportunities available for our undergraduate students. Interested in partnering with us?
               </p>
-              <a href="mailto:partnerships@duke.edu" className="btn">Contact Us</a>
+              <div className="hero-actions">
+                <a href="mailto:dukeappliedmachinelearning@gmail.com" className="hero-cta">Contact Us</a>
+              </div>
             </div>
             <div className="hero-image">
               <Image

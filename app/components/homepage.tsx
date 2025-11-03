@@ -1154,30 +1154,16 @@ export default function Homepage() {
               minHeight: 420,
             }}
           >
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "radial-gradient(circle at 20% 20%, rgba(96, 165, 250, 0.45), transparent 55%), radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.35), transparent 60%)",
-                zIndex: 1,
-                mixBlendMode: "screen",
-              }}
-            />
-            <Image
-              src="/prattschoolofeng.jpg"
-              width={1600}
-              height={900}
-              style={{
-                width: "100%",
-                height: "100%",
+          <Image
+            src="/prattschoolofeng.jpg"
+            fill
+            style={{
                 objectFit: "cover",
                 objectPosition: "center",
-                transform: "scale(1.02)",
-              }}
-              alt="Pratt School of Engineering"
-              priority
-            />
+            }}
+            alt="Pratt School of Engineering"
+            priority
+          />
           </div>
         </div>
       </section>
@@ -1597,6 +1583,11 @@ export default function Homepage() {
                   event.currentTarget.style.background = "transparent";
                   event.currentTarget.style.border =
                     "1px solid rgba(148, 163, 184, 0.5)";
+                }}
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    window.location.href = "/mission";
+                  }
                 }}
               >
                 Explore process

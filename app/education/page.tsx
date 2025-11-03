@@ -1,6 +1,4 @@
 "use client";
-
-import Image from "next/image";
 const pathways = [
   {
     tag: "Machine Learning",
@@ -22,19 +20,6 @@ const pathways = [
       "Cloud platforms like AWS, CI/CD, containerization",
     ],
   },
-];
-
-const universityLogos = [
-  { name: "Duke University", src: "/dukelogo.png" },
-  { name: "Harvard University", src: "/harvardlogo.png" },
-  { name: "MIT", src: "/mitlogo.png" },
-  { name: "Yale University", src: "/yalelogo.png" },
-  { name: "Stanford University", src: "/stanfordlogo.png" },
-];
-
-const platformLogos = [
-  { name: "Coursera", src: "/courseralogo.png" },
-  { name: "Udemy", src: "/udemylogo.png" },
 ];
 
 const syllabus = [
@@ -155,18 +140,18 @@ export default function Education() {
     >
       <section
         style={{
-          padding: "120px 6vw 90px",
-          background:
-            "linear-gradient(135deg, rgba(9, 21, 53, 0.95), rgba(26, 53, 118, 0.88), rgba(59, 130, 246, 0.7))",
-          color: "white",
+          padding: "var(--site-hero-padding)",
+          background: "var(--site-hero-background)",
+          color: "#ffffff",
+          fontFamily: "var(--site-hero-font-family)",
         }}
       >
         <div
           style={{
-            maxWidth: 1080,
+            maxWidth: "var(--site-hero-max-width)",
             margin: "0 auto",
             display: "grid",
-            gap: 28,
+            gap: "var(--site-hero-gap)",
           }}
         >
           <span
@@ -181,9 +166,9 @@ export default function Education() {
           </span>
           <h1
             style={{
-              fontSize: 58,
-              fontWeight: 700,
-              lineHeight: 1.05,
+              fontSize: "var(--site-hero-heading-size)",
+              fontWeight: "var(--site-hero-heading-weight)",
+              lineHeight: "var(--site-hero-heading-line-height)",
               margin: 0,
             }}
           >
@@ -191,10 +176,10 @@ export default function Education() {
           </h1>
           <p
             style={{
-              fontSize: 20,
-              lineHeight: 1.8,
-              color: "rgba(226, 232, 240, 0.92)",
-              maxWidth: 860,
+              fontSize: "var(--site-hero-subheading-size)",
+              lineHeight: "var(--site-hero-subheading-line-height)",
+              color: "var(--site-hero-subheading-color)",
+              maxWidth: "var(--site-hero-text-max-width)",
             }}
           >
            
@@ -287,29 +272,27 @@ export default function Education() {
                   <div
                     key={item}
                     style={{
-                      display: "flex",
-                      gap: 12,
-                      alignItems: "flex-start",
+                      position: "relative",
+                      paddingLeft: "var(--card-bullet-indent)",
+                      fontSize: 15,
+                      color: "#1f2937",
+                      lineHeight: 1.6,
                     }}
                   >
                     <span
+                      aria-hidden
                       style={{
+                        position: "absolute",
+                        left: 0,
+                        top: "0.6em",
                         width: 10,
                         height: 10,
                         borderRadius: "50%",
                         background: "#1d4ed8",
-                        marginTop: 6,
+                        transform: "translateY(-50%)",
                       }}
                     />
-                    <span
-                      style={{
-                        fontSize: 15,
-                        color: "#1f2937",
-                        lineHeight: 1.6,
-                      }}
-                    >
-                      {item}
-                    </span>
+                    {item}
                   </div>
                 ))}
               </div>
@@ -492,8 +475,8 @@ export default function Education() {
               flexWrap: "wrap",
             }}
           >
-            <a
-              href="mailto:renzo.larrea@duke.edu"
+            <button
+              type="button"
               style={{
                 background: "white",
                 color: "#1d4ed8",
@@ -502,10 +485,19 @@ export default function Education() {
                 fontWeight: 600,
                 textDecoration: "none",
                 boxShadow: "0 16px 32px rgba(15, 23, 42, 0.18)",
+                border: "none",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.open(
+                    "https://docs.google.com/forms/d/e/1FAIpQLSfHy0G3zA2e1HIsOjGbkS08euM6FV3hWEwvxW7vGG_hPRf79g/viewform"
+                  );
+                }
               }}
             >
-              Join the interest list {"->"}
-            </a>
+              Join the mailing list {"->"}
+            </button>
             <a
               href="/mission"
               style={{

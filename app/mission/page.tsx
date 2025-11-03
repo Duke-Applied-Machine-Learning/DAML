@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { FaFigma, FaGithub, FaGoogleDrive } from "react-icons/fa";
+import { Fragment, type CSSProperties } from "react";
 
 const missionPhases = [
   {
@@ -90,75 +89,6 @@ const engagementFlow = [
   }
 ];
 
-const toolEcosystem = [
-  {
-    title: "ML Frameworks & Intelligence",
-    description:
-      "",
-    visuals: [
-      { type: "image", src: "/tensorflowlogo.png", alt: "TensorFlow" },
-      { type: "image", src: "/pytorchlogo.png", alt: "PyTorch" },
-      { type: "image", src: "/openailogo.png", alt: "OpenAI" },
-      { type: "image", src: "/geminilogo.png", alt: "Google Gemini" },
-      { type: "image", src: "/pythonlogo.png", alt: "Python" },
-      { type: "image", src: "/rlogo.png", alt: "R" },
-    ],
-  },
-  {
-    title: "Design & Prototyping Systems",
-    description:
-      "",
-    visuals: [
-      { type: "icon", icon: FaFigma, label: "Figma" },
-      { type: "image", src: "/jypiterlogo.png", alt: "Jupyter" },
-      { type: "image", src: "/colablogo.png", alt: "Google Colab" },
-      { type: "icon", icon: FaGoogleDrive, label: "Google Drive" },
-      { type: "icon", icon: FaGithub, label: "GitHub" },
-    ],
-  },
-  {
-    title: "Build, IDEs & Deployment",
-    description:
-      "",
-    visuals: [
-      { type: "image", src: "/JavaScript-logo.png", alt: "JavaScript" },
-      { type: "image", src: "/c++logo.png", alt: "C++" },
-      { type: "image", src: "/csharplogo.svg", alt: "C#" },
-      { type: "image", src: "/next.svg", alt: "Next.js" },
-      { type: "image", src: "/vercel.svg", alt: "Vercel" },
-      { type: "image", src: "/unitylogo.png", alt: "Unity" },
-      { type: "image", src: "/unrealengine.png", alt: "Unreal Engine" },
-    ],
-  },
-];
-
-const stackLayers = [
-  {
-    title: "Prototype the Experience",
-    bullets: [
-      "Figma-to-React design systems for dashboards, operations consoles, and client-ready demos.",
-      "Journey maps, service blueprints, and hardware schematics that align engineers, designers, and operators.",
-      "Mixed-reality simulations and interactive prototypes that de-risk usability before code hardens.",
-    ],
-  },
-  {
-    title: "Build Application Infrastructure",
-    bullets: [
-      "Next.js, FastAPI, and Flask services orchestrating event-driven pipelines with REST and GraphQL bridges.",
-      "Containerized microservices deployed with Kubernetes, Pulumi, and Terraform-managed environments.",
-      "Data contracts across Postgres, Snowflake, and streaming queues to keep analytics trustworthy.",
-    ],
-  },
-  {
-    title: "Apply Advanced ML & Analytics",
-    bullets: [
-      "TensorFlow, PyTorch, and ONNX stacks tuned for vision, NLP, reinforcement learning, and time series.",
-      "Weights & Biases, MLflow, and custom evaluation dashboards to track experiments and fairness metrics.",
-      "Prometheus, Grafana, and bespoke guardrails monitoring performance, drift, and ethical considerations.",
-    ],
-  },
-];
-
 export default function MissionPage() {
   // Calculate a dynamic width so all engagement flow nodes fit on one row
   const nodeCount = engagementFlow.length;
@@ -169,6 +99,32 @@ export default function MissionPage() {
   const minNodeWidth = 260; // px
   const maxNodeWidth = 420; // px
   const widthExpression = `clamp(${minNodeWidth}px, ${nodeWidth}, ${maxNodeWidth}px)`;
+
+  const primaryCtaStyle: CSSProperties = {
+    background: "var(--site-cta-background)",
+    color: "var(--site-cta-color)",
+    border: "none",
+    borderRadius: "var(--site-cta-radius)",
+    padding: "var(--site-cta-padding)",
+    fontSize: "var(--site-cta-font-size)",
+    fontWeight: "var(--site-cta-font-weight)",
+    cursor: "pointer",
+    boxShadow: "var(--site-cta-shadow)",
+    transition: "transform 0.22s ease, box-shadow 0.22s ease",
+    whiteSpace: "nowrap",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const timelineConnectorStyle: CSSProperties = {
+    alignSelf: "center",
+    flex: "0 0 64px",
+    width: 64,
+    height: 2,
+    borderRadius: 999,
+    background: "linear-gradient(90deg, rgba(37, 99, 235, 0.35), rgba(59, 130, 246, 0.7))",
+  };
 
   return (
     <div
@@ -182,35 +138,35 @@ export default function MissionPage() {
     >
       <section
         style={{
-          padding: "120px 6vw 90px",
-          background:
-            "linear-gradient(135deg, rgba(8, 19, 48, 0.95), rgba(26, 53, 118, 0.88), rgba(59, 130, 246, 0.7))",
-          color: "white",
+          padding: "var(--site-hero-padding)",
+          background: "var(--site-hero-background)",
+          color: "#ffffff",
+          fontFamily: "var(--site-hero-font-family)",
         }}
       >
         <div
           style={{
             display: "grid",
-            gap: 24,
+            gap: "var(--site-hero-gap)",
             textAlign: "left",
           }}
         >
           <h1
             style={{
-              fontSize: 56,
-              fontWeight: 700,
-              lineHeight: 1.05,
-              marginBottom: 12,
+              fontSize: "var(--site-hero-heading-size)",
+              fontWeight: "var(--site-hero-heading-weight)",
+              lineHeight: "var(--site-hero-heading-line-height)",
+              margin: 0,
             }}
           >
             Mission & About Us
           </h1>
           <p
             style={{
-              fontSize: 20,
-              lineHeight: 1.8,
-              color: "rgba(226, 232, 240, 0.9)",
-              maxWidth: 860,
+              fontSize: "var(--site-hero-subheading-size)",
+              lineHeight: "var(--site-hero-subheading-line-height)",
+              color: "var(--site-hero-subheading-color)",
+              maxWidth: "var(--site-hero-text-max-width)",
             }}
           >
             We're an inclusive student-led organization dedicated to cultivate 
@@ -286,28 +242,16 @@ export default function MissionPage() {
         <span>Are you a student interested in joining DAML?</span>
         <button
                 aria-label="Join our mailing list"
-                style={{
-                  background: "linear-gradient(135deg, #2563eb 0%, #38bdf8 100%)",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: 999,
-                  padding: "14px 28px",
-                  fontSize: 16,
-                  fontWeight: 700,
-                  cursor: "pointer",
-                  boxShadow: "0 22px 48px rgba(37,99,235,0.25)",
-                  transition: "transform 0.22s ease, box-shadow 0.22s ease",
-                  whiteSpace: "nowrap",
-                }}
+                style={primaryCtaStyle}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLButtonElement;
                   el.style.transform = "translateY(-3px)";
-                  el.style.boxShadow = "0 30px 60px rgba(37,99,235,0.3)";
+                  el.style.boxShadow = "var(--site-cta-shadow-hover)";
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget as HTMLButtonElement;
                   el.style.transform = "translateY(0)";
-                  el.style.boxShadow = "0 22px 48px rgba(37,99,235,0.25)";
+                  el.style.boxShadow = "var(--site-cta-shadow)";
                 }}
                 onClick={() => {
                   if (typeof window !== "undefined") {
@@ -345,23 +289,14 @@ export default function MissionPage() {
               flexWrap: "nowrap",
               gap: 28,
               justifyContent: "flex-start",
-              alignItems: "center",
+              alignItems: "stretch",
               overflowX: "hidden",
               padding: "12px 8px",
               WebkitOverflowScrolling: "touch",
             }}
           >
             {engagementFlow.map((step, index) => (
-              <div
-                key={step.stage}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 16,
-                  flexWrap: "nowrap",
-                  justifyContent: "center",
-                }}
-              >
+              <Fragment key={step.stage}>
                 <div
                   style={{
                     width: widthExpression,
@@ -371,7 +306,7 @@ export default function MissionPage() {
                       "linear-gradient(150deg, rgba(241, 245, 255, 0.95), rgba(226, 232, 255, 0.85))",
                     border: "2px dotted rgba(37, 99, 235, 0.5)",
                     boxShadow: "0 18px 45px rgba(15, 23, 42, 0.08)",
-                    padding: "26px 22px",
+                    padding: "26px 24px",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
@@ -412,46 +347,10 @@ export default function MissionPage() {
                     {step.focus}
                   </p>
                 </div>
-
                 {index < engagementFlow.length - 1 && (
-                  <div
-                    aria-hidden
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: 42,
-                      height: 42,
-                      borderRadius: 999,
-                      background: "rgba(37, 99, 235, 0.08)",
-                      border: "1px solid rgba(37,99,235,0.25)",
-                      boxShadow: "0 10px 24px rgba(37, 99, 235, 0.12)",
-                    }}
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M5 12h12"
-                        stroke="#2563eb"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M13 6l6 6-6 6"
-                        stroke="#2563eb"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
+                  <div style={timelineConnectorStyle} aria-hidden />
                 )}
-              </div>
+              </Fragment>
             ))}
           </div>
         </div>
@@ -624,225 +523,6 @@ export default function MissionPage() {
               </p>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section
-        style={{
-          background: "#0f172a",
-          color: "white",
-          padding: "90px 6vw",
-        }}
-      >
-        <div
-          style={{
-            display: "grid",
-            gap: 36,
-          }}
-        >
-          <div>
-            <span
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                padding: "6px 14px",
-                borderRadius: 999,
-                background: "rgba(148, 197, 255, 0.2)",
-                color: "#bfdbfe",
-                letterSpacing: 2,
-                textTransform: "uppercase",
-                fontSize: 12,
-                fontWeight: 600,
-              }}
-            >
-              Tool Stack
-            </span>
-            <h2
-              style={{
-                fontSize: 34,
-                fontWeight: 700,
-                marginTop: 16,
-                marginBottom: 14,
-              }}
-            >
-              Our tool surface spans research, prototyping, and deployment.
-            </h2>
-            <p
-              style={{
-                fontSize: 18,
-                color: "rgba(226, 232, 240, 0.85)",
-                lineHeight: 1.7,
-              }}
-            >
-            </p>
-            <p
-              style={{
-                fontSize: 16,
-                color: "rgba(203, 213, 225, 0.9)",
-                lineHeight: 1.6,
-              }}
-            >
-            </p>
-          </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-              gap: 24,
-            }}
-          >
-            {toolEcosystem.map((group) => (
-              <div
-                key={group.title}
-                style={{
-                  borderRadius: 24,
-                  background:
-                    "linear-gradient(150deg, rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.55))",
-                  border: "1px solid rgba(148, 163, 184, 0.28)",
-                  padding: "32px 28px",
-                  boxShadow: "0 26px 60px rgba(5, 16, 38, 0.35)",
-                  display: "grid",
-                  gap: 18,
-                  transition: "transform 0.35s ease, box-shadow 0.35s ease",
-                }}
-                onMouseEnter={(event) => {
-                  event.currentTarget.style.transform = "translateY(-10px)";
-                  event.currentTarget.style.boxShadow =
-                    "0 34px 70px rgba(5, 16, 38, 0.5)";
-                }}
-                onMouseLeave={(event) => {
-                  event.currentTarget.style.transform = "translateY(0)";
-                  event.currentTarget.style.boxShadow =
-                    "0 26px 60px rgba(5, 16, 38, 0.35)";
-                }}
-              >
-                <h3 style={{ fontSize: 22, fontWeight: 650, margin: 0 }}>
-                  {group.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: 15,
-                    color: "rgba(226, 232, 240, 0.85)",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {group.description}
-                </p>
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 14,
-                  }}
-                >
-                  {group.visuals.map((visual) => {
-                    // runtime-guard: ensure the visual entry has the expected fields
-                    if (visual.type === "icon" && visual.icon) {
-                      const IconComponent = visual.icon as React.ComponentType<{
-                        size?: number;
-                        color?: string;
-                      }>;
-                      return (
-                        <div
-                          key={visual.label || String(Math.random())}
-                          style={{
-                            width: 60,
-                            height: 60,
-                            borderRadius: 18,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            background: "rgba(248, 250, 252, 0.95)",
-                            border: "1px solid rgba(148, 163, 184, 0.4)",
-                            boxShadow: "0 12px 28px rgba(15, 23, 42, 0.22)",
-                            transition:
-                              "transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
-                          }}
-                          onMouseEnter={(event) => {
-                            event.currentTarget.style.transform =
-                              "translateY(-4px)";
-                            event.currentTarget.style.borderColor =
-                              "rgba(37, 99, 235, 0.6)";
-                            event.currentTarget.style.boxShadow =
-                              "0 18px 34px rgba(15, 23, 42, 0.28)";
-                          }}
-                          onMouseLeave={(event) => {
-                            event.currentTarget.style.transform =
-                              "translateY(0)";
-                            event.currentTarget.style.borderColor =
-                              "rgba(148, 163, 184, 0.4)";
-                            event.currentTarget.style.boxShadow =
-                              "0 12px 28px rgba(15, 23, 42, 0.22)";
-                          }}
-                        >
-                          <IconComponent size={28} color="#1d4ed8" />
-                        </div>
-                      );
-                    }
-
-                    if (visual.type === "image" && visual.src && visual.alt) {
-                      return (
-                        <div
-                          key={visual.src}
-                          style={{
-                            width: 60,
-                            height: 60,
-                            borderRadius: 18,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            background: "rgba(248, 250, 252, 0.95)",
-                            border: "1px solid rgba(148, 163, 184, 0.4)",
-                            boxShadow: "0 12px 28px rgba(15, 23, 42, 0.22)",
-                            transition:
-                              "transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
-                            padding: 10,
-                          }}
-                          onMouseEnter={(event) => {
-                            event.currentTarget.style.transform =
-                              "translateY(-4px)";
-                            event.currentTarget.style.borderColor =
-                              "rgba(37, 99, 235, 0.6)";
-                            event.currentTarget.style.boxShadow =
-                              "0 18px 34px rgba(15, 23, 42, 0.28)";
-                          }}
-                          onMouseLeave={(event) => {
-                            event.currentTarget.style.transform =
-                              "translateY(0)";
-                            event.currentTarget.style.borderColor =
-                              "rgba(148, 163, 184, 0.4)";
-                            event.currentTarget.style.boxShadow =
-                              "0 12px 28px rgba(15, 23, 42, 0.22)";
-                          }}
-                        >
-                          <Image
-                            src={visual.src}
-                            alt={visual.alt}
-                            width={
-                              (visual as unknown as { width?: number }).width ??
-                              36
-                            }
-                            height={
-                              (visual as unknown as { height?: number })
-                                .height ?? 36
-                            }
-                            style={{
-                              objectFit: "contain",
-                              width: "100%",
-                              height: "100%",
-                            }}
-                          />
-                        </div>
-                      );
-                    }
-
-                    return null;
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-          
         </div>
       </section>
 

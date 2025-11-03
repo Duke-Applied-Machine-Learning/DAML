@@ -3,6 +3,38 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Site-wide hero tokens */
+  --site-hero-padding: 120px 6vw 90px;
+  --site-hero-background: linear-gradient(
+    135deg,
+    rgba(9, 21, 53, 0.95),
+    rgba(26, 53, 118, 0.88),
+    rgba(59, 130, 246, 0.7)
+  );
+  --site-hero-font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --site-hero-heading-size: 58px;
+  --site-hero-heading-weight: 700;
+  --site-hero-heading-line-height: 1.05;
+  --site-hero-subheading-size: 20px;
+  --site-hero-subheading-line-height: 1.8;
+  --site-hero-subheading-color: rgba(226, 232, 240, 0.92);
+  --site-hero-max-width: 1080px;
+  --site-hero-text-max-width: 860px;
+  --site-hero-gap: 28px;
+
+  /* Primary CTA tokens */
+  --site-cta-font-size: 16px;
+  --site-cta-font-weight: 700;
+  --site-cta-padding: 14px 28px;
+  --site-cta-radius: 999px;
+  --site-cta-background: linear-gradient(135deg, #2563eb 0%, #38bdf8 100%);
+  --site-cta-color: #ffffff;
+  --site-cta-shadow: 0 22px 48px rgba(37, 99, 235, 0.25);
+  --site-cta-shadow-hover: 0 30px 60px rgba(37, 99, 235, 0.3);
+
+  /* Card tokens */
+  --card-bullet-indent: 32px;
 }
 
 @theme inline {
