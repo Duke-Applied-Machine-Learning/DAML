@@ -1,4 +1,11 @@
 "use client";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import CallToAction from "@/components/sections/CallToAction";
+import Footer from "@/components/layout/Footer";
+
 const pathways = [
   {
     tag: "Machine Learning",
@@ -130,391 +137,163 @@ const logistics = [
 
 export default function Education() {
   return (
-    <div
-      style={{
-        fontFamily: "Roboto, sans-serif",
-        background:
-          "linear-gradient(180deg, #f8fbff 0%, #ffffff 40%, #e8f0ff 100%)",
-        color: "#0f172a",
-      }}
-    >
-      <section
-        style={{
-          padding: "var(--site-hero-padding)",
-          background: "var(--site-hero-background)",
-          color: "#ffffff",
-          fontFamily: "var(--site-hero-font-family)",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "var(--site-hero-max-width)",
-            margin: "0 auto",
-            display: "grid",
-            gap: "var(--site-hero-gap)",
-          }}
-        >
-          <span
-            style={{
-              fontSize: 14,
-              letterSpacing: 6,
-              textTransform: "uppercase",
-              fontWeight: 600,
-              color: "rgba(191, 219, 254, 0.8)",
-            }}
-          >
-          </span>
-          <h1
-            style={{
-              fontSize: "var(--site-hero-heading-size)",
-              fontWeight: "var(--site-hero-heading-weight)",
-              lineHeight: "var(--site-hero-heading-line-height)",
-              margin: 0,
-            }}
-          >
+    <div className="font-sans bg-gradient-to-b from-[#f8fbff] via-white to-[#e8f0ff] text-slate-900">
+      <section className="hero-section text-white">
+        <div className="max-w-[1080px] mx-auto grid gap-7">
+          <h1 className="hero-heading m-0">
             DAML Training Programs
           </h1>
-          <p
-            style={{
-              fontSize: "var(--site-hero-subheading-size)",
-              lineHeight: "var(--site-hero-subheading-line-height)",
-              color: "var(--site-hero-subheading-color)",
-              maxWidth: "var(--site-hero-text-max-width)",
-            }}
-          >
-           
-          </p>
         </div>
       </section>
 
-      <section
-        style={{
-          padding: "80px 6vw",
-          display: "grid",
-          gap: 36,
-        }}
-      >
-        <div style={{ textAlign: "center", display: "grid", gap: 16 }}>
-          <h2 style={{ fontSize: 36, fontWeight: 700 }}>
+      <section className="py-20 px-[6vw] grid gap-9">
+        <div className="text-center grid gap-4">
+          <h2 className="text-[36px] font-bold">
             Two pathways, one integrated build team
           </h2>
-          <p
-            style={{
-              fontSize: 18,
-              color: "#475569",
-              maxWidth: 820,
-              margin: "0 auto",
-              lineHeight: 1.7,
-            }}
-          >
+          <p className="text-lg text-slate-600 max-w-[820px] mx-auto leading-[1.7]">
             Members can specialize or rotate across the AI and infrastructure
             tracks. Shared milestones ensure that experimentation, deployment,
             and documentation stay in sync from the first workshop through the
             final showcase.
           </p>
         </div>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-            gap: 28,
-          }}
-        >
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-7 items-stretch">
           {pathways.map((pathway) => (
-            <div
+            <Card
               key={pathway.name}
-              style={{
-                background: "white",
-                borderRadius: 28,
-                border: "1px solid rgba(148, 163, 184, 0.2)",
-                boxShadow: "0 22px 46px rgba(15, 23, 42, 0.12)",
-                padding: "36px 32px",
-                display: "grid",
-                gap: 18,
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-              }}
-              onMouseEnter={(event) => {
-                event.currentTarget.style.transform = "translateY(-10px)";
-                event.currentTarget.style.boxShadow =
-                  "0 32px 62px rgba(15, 23, 42, 0.16)";
-              }}
-              onMouseLeave={(event) => {
-                event.currentTarget.style.transform = "translateY(0)";
-                event.currentTarget.style.boxShadow =
-                  "0 22px 46px rgba(15, 23, 42, 0.12)";
-              }}
+              className="bg-white rounded-[28px] border border-slate-300/20 shadow-[0_22px_46px_rgba(15,23,42,0.12)] p-9 px-8 flex flex-col h-full transition-all duration-300 ease-in-out hover:-translate-y-2.5 hover:shadow-[0_32px_62px_rgba(15,23,42,0.16)]"
             >
-              <span
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 10,
-                  padding: "8px 16px",
-                  borderRadius: 999,
-                  background: "rgba(37, 99, 235, 0.12)",
-                  color: "#1d4ed8",
-                  fontSize: 13,
-                  fontWeight: 600,
-                  letterSpacing: 1.2,
-                  textTransform: "uppercase",
-                }}
-              >
-                {pathway.tag}
-              </span>
-              <h3 style={{ fontSize: 26, fontWeight: 650, margin: 0 }}>
-                {pathway.name}
-              </h3>
-              <p style={{ fontSize: 16, color: "#475569", lineHeight: 1.65 }}>
-                {pathway.description}
-              </p>
-              <div style={{ display: "grid", gap: 10 }}>
-                {pathway.highlights.map((item) => (
-                  <div
-                    key={item}
-                    style={{
-                      position: "relative",
-                      paddingLeft: "var(--card-bullet-indent)",
-                      fontSize: 15,
-                      color: "#1f2937",
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    <span
-                      aria-hidden
-                      style={{
-                        position: "absolute",
-                        left: 0,
-                        top: "0.6em",
-                        width: 10,
-                        height: 10,
-                        borderRadius: "50%",
-                        background: "#1d4ed8",
-                        transform: "translateY(-50%)",
-                      }}
-                    />
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
+              <CardHeader className="flex-shrink-0 h-[114px] flex flex-col justify-start gap-3 px-0 pt-0 pb-0">
+                <div className="h-[32px] flex items-center flex-shrink-0">
+                  <Badge className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-blue-600/12 text-blue-700 text-xs font-semibold tracking-[1.2px] uppercase w-fit h-[32px]">
+                    {pathway.tag}
+                  </Badge>
+                </div>
+                <div className="h-[70px] flex items-start flex-shrink-0">
+                  <CardTitle className="text-[26px] font-[650] m-0 pt-5 leading-tight">
+                    {pathway.name}
+                  </CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent className="pb-0 px-0 flex-1 flex flex-col">
+                <p className="text-[15.5px] leading-[1.75] text-slate-600 mb-8 flex-shrink-0">
+                  {pathway.description}
+                </p>
+                <div className="flex-1">
+                  {pathway.highlights.map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-3 mb-4 last:mb-0">
+                      <svg
+                        className="flex-shrink-0 w-5 h-5 mt-0.5 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2.5}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <p className="text-[14.5px] leading-[1.7] text-slate-700 flex-1">
+                        {item}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </section>
 
 
-      <section
-        style={{
-          padding: "90px 6vw",
-          display: "grid",
-          gap: 36,
-        }}
-      >
-        <div style={{ textAlign: "center", display: "grid", gap: 16 }}>
-          <h2 style={{ fontSize: 34, fontWeight: 700 }}>
+      <section className="py-[90px] px-[6vw] grid gap-9">
+        <div className="text-center grid gap-4">
+          <h2 className="text-[34px] font-bold">
             AITP Fall 2025 syllabus at a glance
           </h2>
-          <p style={{ fontSize: 17, color: "#475569", lineHeight: 1.7 }}>
+          <p className="text-[17px] text-slate-600 leading-[1.7]">
             Foundational weeks build statistical intuition, the mid-semester
             project track keeps momentum, and the final weeks dive deep into
             modern deep learning architectures.
           </p>
         </div>
-        <div
-          style={{
-            display: "grid",
-            gap: 22,
-          }}
-        >
+        <div className="grid gap-[22px]">
           {syllabus.map((entry, idx) => (
             <div
               key={entry.label}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "140px minmax(0, 1fr)",
-                gap: 20,
-                alignItems: "start",
-              }}
+              className="grid grid-cols-[140px_minmax(0,1fr)] gap-5 items-start"
             >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: 6,
-                }}
-              >
-                <span
-                  style={{
-                    fontWeight: 700,
-                    color: "#1d4ed8",
-                    fontSize: 16,
-                    letterSpacing: 0.6,
-                  }}
-                >
+              <div className="flex flex-col items-start gap-1.5">
+                <span className="font-bold text-blue-700 text-base tracking-[0.6px]">
                   {entry.label}
                 </span>
-                <span
-                  style={{ fontSize: 14, color: "#475569", fontWeight: 600 }}
-                >
+                <span className="text-sm text-slate-600 font-semibold">
                   {entry.topic}
                 </span>
               </div>
-              <div
-                style={{
-                  borderLeft: "3px solid rgba(37, 99, 235, 0.18)",
-                  paddingLeft: 20,
-                  display: "grid",
-                  gap: 10,
-                }}
-              >
+              <div className="border-l-[3px] border-blue-600/18 pl-5 grid gap-2.5">
                 {entry.bullets.map((item) => (
-                  <div
-                    key={item}
-                    style={{ fontSize: 15, color: "#1f2937", lineHeight: 1.6 }}
-                  >
+                  <div key={item} className="text-[15px] text-gray-800 leading-[1.6]">
                     {item}
                   </div>
                 ))}
               </div>
               {idx !== syllabus.length - 1 && (
-                <div
-                  style={{
-                    gridColumn: "1 / -1",
-                    height: 1,
-                    background: "rgba(148, 163, 184, 0.2)",
-                  }}
-                />
+                <div className="col-span-full h-px bg-slate-300/20" />
               )}
             </div>
           ))}
         </div>
       </section>
 
-      <section
-        style={{
-          padding: "80px 6vw",
-          background:
-            "linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(20, 184, 166, 0.08))",
-          display: "grid",
-          gap: 32,
-        }}
-      >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: 28,
-          }}
-        >
+      <section className="py-20 px-[6vw] bg-gradient-to-br from-blue-500/8 via-teal-500/8 to-transparent grid gap-8">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-7">
           {logistics.map((item) => (
-            <div
+            <Card
               key={item.title}
-              style={{
-                background: "white",
-                borderRadius: 22,
-                border: "1px solid rgba(148, 163, 184, 0.25)",
-                boxShadow: "0 18px 42px rgba(15, 23, 42, 0.12)",
-                padding: "28px 26px",
-                display: "grid",
-                gap: 12,
-              }}
+              className="bg-white rounded-[22px] border border-slate-300/25 shadow-[0_18px_42px_rgba(15,23,42,0.12)] p-7 px-[26px] grid gap-3 transition-all duration-300 ease-in-out hover:-translate-y-2.5 hover:shadow-[0_32px_62px_rgba(15,23,42,0.16)]"
             >
-              <h3 style={{ fontSize: 20, fontWeight: 650, margin: 0 }}>
-                {item.title}
-              </h3>
-              <div style={{ display: "grid", gap: 10 }}>
+              <CardHeader>
+                <CardTitle className="text-xl font-[650] m-0">
+                  {item.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="grid gap-2.5">
                 {item.bullets.map((bullet) => (
-                  <div
-                    key={bullet}
-                    style={{ fontSize: 15, color: "#1f2937", lineHeight: 1.6 }}
-                  >
+                  <div key={bullet} className="text-[15px] text-gray-800 leading-[1.6]">
                     {bullet}
                   </div>
                 ))}
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </section>
 
-      <section
-        style={{
-          padding: "72px 6vw",
-          background: "#0f172a",
-          color: "#f8fafc",
+      <CallToAction
+        title="Deliver, present, certify"
+        description="Completing workshops, milestones, showcase presentations, and the final exam earns the AITP certification. Certified members flow directly into DAML senior engineering roles and partner-facing pods."
+        primaryButton={{
+          text: "Join the mailing list",
+          onClick: () => {
+            if (typeof window !== "undefined") {
+              window.open(
+                "https://docs.google.com/forms/d/e/1FAIpQLSfHy0G3zA2e1HIsOjGbkS08euM6FV3hWEwvxW7vGG_hPRf79g/viewform"
+              );
+            }
+          },
         }}
-      >
-        <div
-          style={{
-            maxWidth: 960,
-            margin: "0 auto",
-            display: "grid",
-            gap: 20,
-            textAlign: "center",
-          }}
-        >
-          <h2 style={{ fontSize: 34, fontWeight: 700, margin: 0 }}>
-            Deliver, present, certify
-          </h2>
-          <p
-            style={{
-              fontSize: 17,
-              lineHeight: 1.7,
-              color: "rgba(226, 232, 240, 0.85)",
-            }}
-          >
-            Completing workshops, milestones, showcase presentations, and the
-            final exam earns the AITP certification. Certified members flow
-            directly into DAML senior engineering roles and partner-facing pods.
-          </p>
-          <div
-            style={{
-              display: "flex",
-              gap: 16,
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <button
-              type="button"
-              style={{
-                background: "white",
-                color: "#1d4ed8",
-                borderRadius: 999,
-                padding: "12px 24px",
-                fontWeight: 600,
-                textDecoration: "none",
-                boxShadow: "0 16px 32px rgba(15, 23, 42, 0.18)",
-                border: "none",
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                if (typeof window !== "undefined") {
-                  window.open(
-                    "https://docs.google.com/forms/d/e/1FAIpQLSfHy0G3zA2e1HIsOjGbkS08euM6FV3hWEwvxW7vGG_hPRf79g/viewform"
-                  );
-                }
-              }}
-            >
-              Join the mailing list {"->"}
-            </button>
-            <a
-              href="/mission"
-              style={{
-                background: "rgba(255, 255, 255, 0.1)",
-                border: "1px solid rgba(255, 255, 255, 0.35)",
-                borderRadius: 999,
-                padding: "12px 24px",
-                fontWeight: 600,
-                color: "white",
-                textDecoration: "none",
-              }}
-            >
-              See how training fuels R&D {"->"}
-            </a>
-          </div>
-        </div>
-      </section>
+        secondaryButton={{
+          text: "See how training fuels R&D",
+          href: "/mission",
+        }}
+        backgroundColor="bg-slate-900"
+        maxWidth="960px"
+      />
+      <Footer />
     </div>
   );
 }

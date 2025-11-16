@@ -1,11 +1,12 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import Footer from "@/components/layout/Footer";
 
 const leaders = [
   {
     name: "Renzo Larrea",
-    img: "/renzo.jpeg",
+    img: "/headshots/renzo.jpeg",
     role: "Director",
     major: "Math & Stats",
     year: "2028",
@@ -14,7 +15,7 @@ const leaders = [
   },
   {
     name: "Jonathan Ouwerx",
-    img: "/jonathan.jpeg",
+    img: "/headshots/jonathan.jpeg",
     role: "Director",
     major: "Math & CS",
     year: "2027",
@@ -23,7 +24,7 @@ const leaders = [
   },
   {
     name: "Brian Chen",
-    img: "/brian.jpeg",
+    img: "/headshots/brian.jpeg",
     role: "Head of Outreach",
     major: "CS",
     year: "2026",
@@ -32,7 +33,7 @@ const leaders = [
   },
   {
     name: "Jai Kasera",
-    img: "/Jai.jpeg",
+    img: "/headshots/jai.jpeg",
     role: "Data Science Division Lead",
     major: "Math & CS",
     year: "2027",
@@ -41,7 +42,7 @@ const leaders = [
   },
   {
     name: "Arjun Mahesh",
-    img: "/arjun.jpeg",
+    img: "/headshots/arjun.jpeg",
     role: "Software Division Lead",
     major: "Math, CS, & Finance",
     year: "2026",
@@ -49,8 +50,17 @@ const leaders = [
       "Arjun oversees software engineering, code quality, and ML infrastructure for all teams.",
   },
   {
+    name: "Tyler",
+    img: "/headshots/tyler.jpeg",
+    role: "Software Division Lead",
+    major: "CS",
+    year: "2027",
+    description:
+      "Tyler collaborates on software engineering initiatives, code quality standards, and ML infrastructure across DAML projects.",
+  },
+  {
     name: "Orlando Jacob Tardi",
-    img: "/orlando.jpeg",
+    img: "/headshots/orlando.jpeg",
     role: "VP Hardware",
     major: "BME",
     year: "2026",
@@ -59,7 +69,7 @@ const leaders = [
   },
   {
     name: "Mayur Sekhar",
-    img: "/Mayur.png",
+    img: "/headshots/mayur.png",
     role: "Head of ML Consulting",
     major: "Math & CS, AI Concentration",
     year: "2027",
@@ -68,7 +78,7 @@ const leaders = [
   },
   {
     name: "Arnav Jindal",
-    img: "/arnav.png",
+    img: "/headshots/arnav.png",
     role: "DevOps Course Instructor",
     major: "CS",
     year: "2026",
@@ -77,7 +87,7 @@ const leaders = [
   },
   {
     name: "Rithvik Neti",
-    img: "/rithvik.jpeg",
+    img: "/headshots/rithvik.jpeg",
     role: "AITP Course Instructor",
     major: "CS & Political Science",
     year: "2027",
@@ -86,7 +96,7 @@ const leaders = [
   },
   {
     name: "David Li",
-    img: "/David.jpeg",
+    img: "/headshots/david.jpeg",
     role: "Head of Project Management",
     major: "CS & Econ",
     year: "2028",
@@ -95,7 +105,7 @@ const leaders = [
   },
   {
     name: "Saubdiel Avalos",
-    img: "/saubdiel.png",
+    img: "/headshots/saubdiel.png",
     role: "Graphics Designer",
     major: "Econ & Public Policy",
     year: "2027",
@@ -104,7 +114,7 @@ const leaders = [
   },
   {
     name: "Valiantsin Kasabrukhau",
-    img: "headshotsample.jpg",
+    img: "/headshots/valiantsin.jpg",
     role: "Website Developer",
     major: "CS & AI Concentration",
     year: "2028",
@@ -303,6 +313,7 @@ export default function Leadership() {
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 }
