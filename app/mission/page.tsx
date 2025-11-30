@@ -10,31 +10,31 @@ import Footer from "@/components/layout/Footer";
 
 const missionPhases = [
   {
-    caption: "Initial Planning Phase",
-    title: "Project Proposal + Business Strategy",
+    caption: "Planning Phase",
+    title: "Project Proposal",
     description:
-      "Product Managers/ML Consultants meet to discuss ML strategy, develop a plan, and ensemble a DAML team of engineers.",
+      "Product Managers/ML Consultants discuss project requirements, develop plans, and ensemble a DAML engineer team.",
     accent: "#38bdf8",
   },
   {
     caption: "R&D Sprints",
-    title: "ETL + EDA",
+    title: "Exploratory Data Analysis",
     description:
-      "Our team extracts, transforms, and loads data for exploratory data analysis, and training/evaluating models, documenting the methodology.",
+      "Our team extracts data for EDA and training/evaluating models, documenting the methodology.",
     accent: "#f97316",
   },
   {
-    caption: "Validation & Deployment",
-    title: "Review + scaling for deployment",
+    caption: "Reports",
+    title: "Model Prototype",
     description:
-      "Model is presented to clients, where we begin scaling it into deployment.",
+      "Best performing model is presented to clients, where we begin scaling and retraining it into deployment.",
     accent: "#a855f7",
   },
   {
     caption: "Launch & Impact",
-    title: "Solutions shipped with documentation",
+    title: "Solutions deployed",
     description:
-      "We hand over production-ready repositories, training artifacts, and documentation.",
+      "We hand over repositories, training artifacts, and user guides outlining next steps",
     accent: "#22d3ee",
   },
 ];
@@ -84,7 +84,7 @@ const engagementFlow = [
     icon: Server,
     badge: "Infrastructure",
   },
-  {
+    {
     stage: "Data Engineering",
     focus:
       "Master ETL pipelines, data warehousing, and workflow optimization to build reliable data infrastructure.",
