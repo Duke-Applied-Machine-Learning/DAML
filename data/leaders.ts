@@ -1,120 +1,105 @@
+import { Description } from "@radix-ui/react-dialog";
+
 export const leaders = [
-  {
-    name: "Renzo Larrea",
-    img: "/headshots/renzo.jpeg",
-    role: "Director",
-    major: "Math & Stats",
-    year: "2028",
-    description:
-      "Renzo steers DAML's vision, partner strategy, and cross-team alignment while focusing on applied deep learning for healthcare.",
-  },
   {
     name: "Jonathan Ouwerx",
     img: "/headshots/jonathan.jpeg",
-    role: "Director",
+    role: "Co-Director",
+    type: "Executive",
     major: "Math & CS",
     year: "2027",
     description:
       "Jonathan coordinates long-range roadmaps, staffing, and operational efficiency across every DAML initiative.",
   },
   {
-    name: "Brian Chen",
-    img: "/headshots/brian.jpeg",
-    role: "Head of Outreach",
-    major: "CS",
-    year: "2026",
+    name: "Renzo Larrea",
+    img: "/headshots/renzo.jpeg",
+    role: "Co-Director",
+    type: "Executive",
+    major: "Math & CS",
+    year: "2028",
     description:
-      "Brian leads outreach, sponsorships, and partnerships that connect DAML pods with high-impact engagements.",
+      "Renzo steers DAML's vision, partner strategy, and cross-team alignment while focusing on applied deep learning for healthcare.",
   },
   {
     name: "Jai Kasera",
     img: "/headshots/jai.jpeg",
-    role: "Data Science Division Lead",
+    role: "VP Data Science Division Lead",
+    type: "Executive",
     major: "Math & CS",
     year: "2027",
     description:
       "Jai designs the AI Training Program curriculum and mentors analytics pods working with clients.",
   },
   {
+    name: "Clara Bartusiak",
+    img: "/headshots/clara.jpg",
+    role: "Director of Outreach",
+    type: "Operations",
+    major: "ECE & CS",
+    year: "2027",
+    description:
+      "Brian leads outreach, sponsorships, and partnerships that connect DAML pods with high-impact engagements.",
+  },
+    {
     name: "Arjun Mahesh",
     img: "/headshots/arjun.jpeg",
     role: "Software Division Lead",
+    type: "Executive",
     major: "Math, CS, & Finance",
     year: "2026",
     description:
       "Arjun guides software architecture, code quality, and ML infrastructure decisions across DAML builds.",
   },
-  {
-    name: "Tyler",
-    img: "/headshots/tyler.jpeg",
-    role: "Software Division Lead",
-    major: "CS",
-    year: "2027",
-    description:
-      "Tyler collaborates on software engineering initiatives, code quality standards, and ML infrastructure across DAML projects.",
-  },
-  {
-    name: "Orlando Jacob Tardi",
-    img: "/headshots/orlando.jpeg",
-    role: "VP Hardware",
-    major: "BME",
-    year: "2026",
-    description:
-      "Orlando leads hardware and robotics pods, integrating ML with embedded systems, sensors, and IoT devices.",
-  },
-  {
-    name: "Mayur Sekhar",
-    img: "/headshots/mayur.png",
-    role: "Head of ML Consulting",
-    major: "Math & CS, AI Concentration",
-    year: "2027",
-    description:
-      "Mayur runs discovery and delivery playbooks for our ML consulting pods and manages executive stakeholder touchpoints.",
-  },
-  {
+    {
     name: "Arnav Jindal",
     img: "/headshots/arnav.png",
-    role: "DevOps Course Instructor",
+    role: "Software Division Lead",
+    type: "Executive",
     major: "CS",
     year: "2026",
     description:
       "Arnav architected DAML's DevOps curriculum and keeps our infrastructure automation humming for every project team.",
   },
   {
+    name: "Mayur Sekhar",
+    img: "/headshots/mayur.jpg",
+    role: "VP of ML Consulting",
+    type: "Executive",
+    major: "Math & CS, AI Concentration",
+    year: "2027",
+    description:
+      "Mayur runs discovery and delivery playbooks for our ML consulting pods and manages executive stakeholder touchpoints.",
+  },
+  {
     name: "Rithvik Neti",
     img: "/headshots/rithvik.jpeg",
-    role: "AITP Course Instructor",
+    role: "AITP Instructor",
+    type: "Executive",
     major: "CS & Political Science",
     year: "2027",
     description:
       "Rithvik teaches foundational AI concepts, mentors research pods, and evolves AITP workshops each semester.",
   },
   {
+    name: "Ashley Park",
+    img: "/headshots/ashley.jpg",
+    role: "Director of Marketing",
+    type: "Operations",
+    major: "CS & Stats",
+    year: "2028",
+    description:
+      "Ashley drives DAML's marketing strategy, brand development, and communications to amplify our impact.",
+  },
+  {
     name: "David Li",
     img: "/headshots/david.jpeg",
     role: "Head of Project Management",
+    type: "Executive",
     major: "CS & Econ",
     year: "2028",
     description:
       "David drives project management discipline, ensuring every pod meets milestones, documentation, and delivery quality bars.",
-  },
-  {
-    name: "Saubdiel Avalos",
-    img: "/headshots/saubdiel.png",
-    role: "Graphics Designer",
-    major: "Econ & Public Policy",
-    year: "2027",
-    description:
-      "Saubdiel shapes DAML's visual language, brand systems, and design collateral for events and partner showcases.",
-  },
-  {
-    name: "Valiantsin Kasabrukhau",
-    img: "/headshots/valiantsin.jpg",
-    role: "Website Developer",
-    major: "CS & AI Concentration",
-    year: "2028",
-    description:
-      "Valiantsin maintains DAML's web platform, design system, and content deployment workflows.",
   },
 ];
 

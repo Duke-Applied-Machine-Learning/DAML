@@ -84,13 +84,6 @@ const engagementFlow = [
     icon: Server,
     badge: "Infrastructure",
   },
-    {
-    stage: "Data Engineering",
-    focus:
-      "Master ETL pipelines, data warehousing, and workflow optimization to build reliable data infrastructure.",
-    icon: Database,
-    badge: "Data",
-  },
   {
     stage: "Project Management",
     focus:
@@ -110,6 +103,7 @@ const engagementFlow = [
 export default function MissionPage() {
   const MotionCard = motion(Card);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const stepsCount = engagementFlow.length;
 
   return (
     <div className="font-sans bg-gradient-to-b from-[#f7f9ff] via-white to-[#eef2ff] min-h-screen text-slate-900">
@@ -121,10 +115,7 @@ export default function MissionPage() {
           <p className="hero-subheading">
             We're an inclusive student-led organization dedicated to cultivate 
             and accelerate student talent through education initiatives 
-            and collaborative real-world ML projects. 
-              <br /><br />
-            Instead of limiting ourselves through a selective process, we open 
-            our doors to all with a desire to learn.
+            and collaborative real-world ML projects.
           </p>
         </div>
       </section>
@@ -138,10 +129,9 @@ export default function MissionPage() {
           </CardHeader>
           <CardContent className="text-[19px] text-slate-600 leading-[1.8] max-w-[720px] mt-2 flex flex-col gap-6">
             <p>
-              Our members get started with our education initiatives, learning the
-              fundamentals of ML and applying them with a beginner project. As they
-              progress, they advance to further roles and start getting involved with
-              our client projects.
+              Our members start with our education initiatives, learning ML fundamentals 
+              and applying them to a beginner project. As they
+              progress, they take on basic DevOps and project management, contributing to our projects.
             </p>
 
             <span>Are you a student interested in joining DAML?</span>
@@ -168,17 +158,18 @@ export default function MissionPage() {
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900">
               Our members' learning progression
             </h2>
-            <p className="mt-4 text-center text-base sm:text-lg text-muted-foreground text-slate-600 max-w-3xl mx-auto">
-              From first project to leading a division, each step builds real client-ready skills.
-            </p>
           </div>
-
           {/* Timeline bar (desktop) */}
           <div className="relative hidden lg:flex justify-between items-start mt-8 mb-6 px-2">
             {/* Base line */}
-            <div className="absolute left-0 right-0 top-4 h-0.5 bg-slate-200" />
+            <div 
+              className="absolute top-4 h-0.5 bg-slate-200" 
+               style={{
+                  left: `calc((100% / ${stepsCount}) / 2)`,
+                  right: `calc((100% / ${stepsCount}) / 2)`,
+                }}
+            />
             {/* Line from left edge to first node - always blue */}
-            <div className="absolute left-2 top-4 h-0.5 bg-sky-500 z-0" style={{ width: 'calc((100% - 1rem) / 12)' }} />
             {engagementFlow.map((step, idx) => {
               // Use hoveredIndex to determine progress state
               const isCompleted = hoveredIndex !== null ? idx < hoveredIndex : idx < 2;
@@ -217,7 +208,10 @@ export default function MissionPage() {
           </div>
 
           {/* Cards container */}
-          <div className="relative mt-12 flex gap-6 overflow-x-auto overflow-y-visible pt-6 pb-12 lg:mt-10 lg:grid lg:grid-cols-6 lg:gap-8 xl:gap-10 lg:px-6 xl:px-8 snap-x snap-mandatory [scrollbar-width:thin] [scrollbar-color:rgb(203_213_225)_transparent]">
+           <div
+              className="relative mt-12 flex gap-6 overflow-x-auto overflow-y-visible pt-6 pb-12 lg:mt-10 lg:grid lg:gap-8 xl:gap-10 lg:px-6 xl:px-8 snap-x snap-mandatory [scrollbar-width:thin] [scrollbar-color:rgb(203_213_225)_transparent]"
+              style={{ gridTemplateColumns: `repeat(${stepsCount}, minmax(0, 1fr))` }}
+            >
             {engagementFlow.map((step, i) => {
               const Icon = step.icon;
               const isHovered = hoveredIndex === i;

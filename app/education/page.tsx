@@ -139,9 +139,9 @@ export default function Education() {
   return (
     <div className="font-sans bg-gradient-to-b from-[#f8fbff] via-white to-[#e8f0ff] text-slate-900">
       <section className="hero-section text-white">
-        <div className="max-w-[1080px] mx-auto grid gap-7">
+        <div className="grid gap-7 text-left">
           <h1 className="hero-heading m-0">
-            DAML Training Programs
+            Training Programs
           </h1>
         </div>
       </section>
