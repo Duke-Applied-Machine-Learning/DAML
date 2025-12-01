@@ -106,7 +106,6 @@ const logistics = [
     bullets: [
       "Comfort with Python from CS 101/201 or equivalent experience.",
       "Prior exposure to high school or college-level CS courses is helpful but not required.",
-      "Growth mindset and a willingness to collaborate in fast-paced project teams.",
     ],
   },
   {
@@ -114,7 +113,6 @@ const logistics = [
     bullets: [
       "Workshops: Saturdays 2:00-3:00pm in SocSci 139 (hybrid option available).",
       "Project work sessions: Saturdays 3:00-4:00pm in SocSci 139 with mentor check-ins.",
-      "Time cards document hours spent, progress, and GitHub commits for accountability.",
     ],
   },
   {
@@ -122,14 +120,12 @@ const logistics = [
     bullets: [
       "More than one unexcused workshop absence removes eligibility for certification.",
       "Notify division leads early if a permanent scheduling conflict exists; recordings provided when approved.",
-      "Peer evaluations and final deliverables determine advancement to Senior Engineer roles.",
     ],
   },
   {
     title: "Final deliverables",
     bullets: [
       "Project showcase with faculty and partner judges at semester end.",
-      "Short final exam covering AITP content to validate mastery.",
       "Weighted score across presentation and exam informs placement on advanced engagements.",
     ],
   },
@@ -287,7 +283,7 @@ export default function Education() {
           },
         }}
         secondaryButton={{
-          text: "See how training fuels R&D",
+          text: "See the whole pipeline",
           href: "/mission",
         }}
         backgroundColor="bg-slate-900"

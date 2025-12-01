@@ -60,7 +60,7 @@ export default function Students() {
           href: "mailto:renzo.larrea@duke.edu",
         }}
         secondaryButton={{
-          text: "Explore consulting pods",
+          text: "Explore consulting",
           href: "mailto:mayur.sekhar@duke.edu",
         }}
         backgroundColor="bg-gradient-to-br from-[#040c24] to-[#0b2f5c]"
