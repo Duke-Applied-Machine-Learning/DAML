@@ -218,56 +218,23 @@ function AnimatedGradient() {
           </Button>
 
           <Button
-            className="bg-blue-600 text-white font-semibold px-6 py-6 rounded-full text-base transition-all duration-300 shadow-[0_18px_32px_rgba(37,99,235,0.35)] hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-[0_22px_40px_rgba(29,78,216,0.45)]"
+            className="
+              bg-blue-600 text-white font-semibold px-6 py-6 rounded-full text-base
+              transition-all duration-300
+              shadow-[0_12px_24px_rgba(15,23,42,0.12)]
+              hover:bg-blue-700 hover:-translate-y-0.5
+              hover:shadow-[0_20px_28px_rgba(15,23,42,0.22)]
+            "
             onClick={() => {
               const section = document.getElementById("join-daml");
               if (!section) return;
 
-              // wait 0.6 s before starting the scroll
-              setTimeout(() => {
-              // --- 1. Create a temporary dim overlay ---
-              const overlay = document.createElement("div");
-              overlay.className = "fixed inset-0 w-screen h-screen bg-black/0 z-[9999] transition-colors duration-300";
-              document.body.appendChild(overlay);
-
-              // fade in to ~20% black
-              requestAnimationFrame(() => {
-                overlay.className = "fixed inset-0 w-screen h-screen bg-black/20 z-[9999] transition-colors duration-300";
-              });
-
-              // --- 2. Smooth scroll logic ---
-              const startY = window.scrollY;
-              const targetY =
-                section.getBoundingClientRect().top + window.scrollY;
-              const distance = targetY - startY;
-              const duration = 1600; // 1.6 second scroll
-              const startTime = performance.now();
-
-              function easeInOutQuad(t: number) {
-                return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-              }
-
-              function animateScroll(currentTime: number) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const eased = easeInOutQuad(progress);
-                window.scrollTo(0, startY + distance * eased);
-
-                if (elapsed < duration) {
-                  requestAnimationFrame(animateScroll);
-                } else {
-                  // --- 3. Fade overlay back out ---
-                  overlay.className = "fixed inset-0 w-screen h-screen bg-black/0 z-[9999] transition-colors duration-300";
-                  setTimeout(() => overlay.remove(), 300); // remove after fade-out
-                }
-              }
-
-              requestAnimationFrame(animateScroll);
-            }, 500); // keep your 0.6s delay
+              section.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }}
           >
             Join us
           </Button>
+
         </div>
       </div>
     </div>
@@ -823,26 +790,29 @@ export default function Homepage() {
       </section>
 
       {/* Join Our Team Section */}
-      <CallToAction
-        title="Build alongside Duke's most curious engineers"
-        description="Join a community that ships ML projects, runs member-led labs, and mentors across research and production. We welcome members at all experience levels — start small, learn quickly, and lead real work."
-        primaryButton={{
-          text: "Join our mailing list",
-          onClick: () => {
-            if (typeof window !== "undefined") {
-              window.open(
-                "https://docs.google.com/forms/d/e/1FAIpQLSfHy0G3zA2e1HIsOjGbkS08euM6FV3hWEwvxW7vGG_hPRf79g/viewform?usp=dialog"
-              );
-            }
-          },
-        }}
-        secondaryButton={{
-          text: "Meet our team",
-          href: "/students",
-        }}
-        backgroundColor="bg-gradient-to-br from-[#1a2332] via-[#2a3f5f] to-[#1e3a5f]"
-        maxWidth="1080px"
-      />
+      <section id="join-daml">
+  <CallToAction
+    title="Build alongside Duke's most curious engineers"
+    description="Join a community that ships ML projects, runs member-led labs, and mentors across research and production. We welcome members at all experience levels — start small, learn quickly, and lead real work."
+    primaryButton={{
+      text: "Join our mailing list",
+      onClick: () => {
+        if (typeof window !== "undefined") {
+          window.open(
+            "https://docs.google.com/forms/d/e/1FAIpQLSfHy0G3zA2e1HIsOjGbkS08euM6FV3hWEwvxW7vGG_hPRf79g/viewform?usp=dialog"
+          );
+        }
+      },
+    }}
+    secondaryButton={{
+      text: "Meet our team",
+      href: "/students",
+    }}
+    backgroundColor="bg-gradient-to-br from-[#1a2332] via-[#2a3f5f] to-[#1e3a5f]"
+    maxWidth="1080px"
+  />
+</section>
+
 
       <Footer />
     </div>
