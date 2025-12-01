@@ -682,7 +682,7 @@ export default function Homepage() {
               Program Projects
             </span>
             <h2 className="text-[38px] font-bold text-slate-900 leading-[1.2]">
-              Members ship research, software, and strategy that matter.
+              Members work on projects that test their data science and ML skills.
             </h2>
             <p className="text-lg leading-[1.7] text-slate-600">
               Explore a snapshot of our member's projects from recent semesters.
