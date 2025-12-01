@@ -408,7 +408,7 @@ export default function Homepage() {
         <AnimatedGradient />
       </section>
       {/* Work with us Section */}
-      <section className="bg-gradient-to-br from-[#1e3a5f] via-[#2d4f93] to-[#4b74c4] text-slate-50 py-24 px-[6vw] mt-0 w-full flex flex-row items-center gap-50 max-md:flex-col max-md:items-start justify-center">
+      <section className="bg-gradient-to-br from-[#1e3a5f] via-[#2d4f93] to-[#4b74c4] text-slate-50 py-10 px-[6vw] mt-0 w-full flex flex-row items-center gap-50 max-md:flex-col max-md:items-start justify-center">
         {/* Left side: Title */}
         <div className="flex-shrink-0">
           <h2 className="text-[2.5rem] font-extrabold text-slate-50 m-0 tracking-[-0.02em]">
@@ -628,13 +628,13 @@ export default function Homepage() {
         </div>
       </section> */}
       {/* Education Pathways */}
-      <section className="py-[110px] px-6 bg-white">
-        <div className="max-w-[1100px] mx-auto grid gap-8">
-          <div className="flex flex-col gap-3 max-w-[680px]">
+      <section className="py-[110px] px-[6vw] bg-white">
+        <div className="max-w-[1400px] mx-auto grid gap-8">
+          <div className="flex flex-col gap-3 max-w-[800px]">
             <span className="text-xs tracking-[4px] font-semibold uppercase text-blue-600">
               Education Pathways
             </span>
-            <h2 className="text-[34px] font-bold text-slate-900 leading-[1.15] m-0">
+            <h2 className="text-[44px] font-bold leading-[1.1] m-0">
               Programs that cultivate machine learning talent at Duke.
             </h2>
           </div>
@@ -673,46 +673,26 @@ export default function Homepage() {
       </section>
 
       {/* Client Partnerships */}
-      <section className="py-[110px] px-6 bg-gradient-to-br from-[rgba(8,18,49,1)] via-[rgba(30,41,59,0.95)] to-[rgba(37,99,235,0.9)] text-slate-50">
-        <div className="max-w-[1200px] mx-auto grid gap-12 grid-cols-[repeat(auto-fit,minmax(320px,1fr))] items-center">
-          <div className="flex flex-col gap-[18px]">
-            <h2 className="text-[38px] font-bold leading-[1.2] text-slate-50">
-              Client projects —<br/>
-              You get Duke's CS Talent,<br/>
-              We get real-world experience.
+      <section className="py-[110px] px-[6vw] bg-gradient-to-br from-[#040b1f] via-[#0b1f3d] to-[#123263] text-slate-50">
+        <div className="max-w-[1400px] mx-auto grid gap-12">
+          {/* Heading */}
+          <div className="flex flex-col gap-[18px] max-w-[680px]">
+            <span className="text-xs tracking-[4px] font-semibold uppercase text-blue-300/75">
+              Client Projects
+            </span>
+            <h2 className="text-[44px] font-bold leading-[1.1] m-0">
+              Pairing Duke's CS Talent with real-world experience
             </h2>
-            <div className="flex gap-4 flex-wrap mt-3">
-              <Button
-                className="bg-gradient-to-br from-[#fb7185] to-[#f97316] border-none rounded-full px-7 py-6 font-semibold text-lg text-slate-900 shadow-[0_24px_55px_rgba(251,113,133,0.35)] transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-[0_32px_70px_rgba(251,113,133,0.45)]"
-                onClick={() => {
-                  if (typeof window !== "undefined") {
-                    window.location.href = "/partnerWithUs";
-                  }
-                }}
-              >
-                Partner with DAML
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-transparent rounded-full px-7 py-6 font-semibold text-lg border border-slate-400/50 text-slate-50 backdrop-blur-[8px] transition-all duration-300 ease-in-out hover:text-white hover:bg-white/8 hover:border-blue-300/90"
-                onClick={() => {
-                  if (typeof window !== "undefined") {
-                    window.location.href = "/mission";
-                  }
-                }}
-              >
-                Explore process
-              </Button>
-            </div>
           </div>
-          <div className="grid gap-5">
-            {clientValueProps.map((item, idx) => (
+
+          <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(320px,1fr))]">
+            {clientValueProps.map((item) => (
               <Card
                 key={item.title}
-                className="relative p-7 px-[26px] rounded-[22px] bg-slate-900/72 border border-slate-400/35 shadow-[0_18px_50px_rgba(15,23,42,0.35)]"
+                className="relative p-7 px-[26px] rounded-[22px] bg-gradient-to-br from-blue-300/16 to-blue-500/8 border border-slate-400/35 shadow-[0_18px_50px_rgba(15,23,42,0.35)] transition-all duration-[280ms] ease-in-out hover:-translate-y-2 hover:shadow-[0_32px_70px_rgba(3,14,35,0.45)] hover:border-white/50"
               >
                 <CardHeader>
-                  <CardTitle className="text-base font-semibold tracking-[3px] text-blue-300/70 uppercase mb-2.5">
+                  <CardTitle className="text-base font-semibold tracking-[3px] text-white uppercase mb-2.5">
                     {item.title}
                   </CardTitle>
                 </CardHeader>
@@ -728,9 +708,9 @@ export default function Homepage() {
       </section>
 
       {/* Program Projects Section */}
-      <section className="py-[110px] px-6 pb-[120px] bg-gradient-to-b from-[#f8fafc] to-white">
-        <div className="max-w-[1200px] mx-auto grid gap-12">
-          <div className="flex flex-col gap-4 max-w-[760px]">
+      <section className="py-[110px] px-[6vw] pb-[120px] bg-gradient-to-b from-[#f8fafc] to-white">
+        <div className="max-w-[1400px] mx-auto grid gap-12">
+          <div className="flex flex-col gap-4 max-w-[800px]">
             <span className="text-xs tracking-[4px] font-semibold uppercase text-rose-500">
               Program Projects
             </span>
@@ -741,6 +721,7 @@ export default function Homepage() {
               Explore a snapshot of our member's projects from recent semesters.
             </p>
           </div>
+
           <div className="grid grid-cols-12 grid-rows-[minmax(160px,auto)] gap-5">
             {programProjects.map((project, idx) => {
               const isInProgress = project.status
@@ -834,7 +815,7 @@ export default function Homepage() {
               );
             })}
           </div>
-          <div className="flex items-center gap-3 text-blue-900 text-[15px] font-medium">
+          <div className="flex items-center gap-3 text-blue-900 text-[15px] font-medium max-w-[800px] ml-1">
             <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shadow-[0_0_16px_rgba(37,99,235,0.5)]" />
             We ensure we train a variety of models to choose the best one.
           </div>

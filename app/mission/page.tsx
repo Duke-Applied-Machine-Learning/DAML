@@ -78,9 +78,9 @@ const engagementFlow = [
     badge: "Foundation",
   },
   {
-    stage: "DevOps Bootcamp",
+    stage: "DevOps & Client Projects",
     focus:
-      "Learn cloud computing, containerization, and deployment practices to scale ML models in production environments.",
+      "Cloud computing, containerization, and deployment to scale models, while working on our client/internal projects.",
     icon: Server,
     badge: "Infrastructure",
   },
@@ -110,47 +110,53 @@ export default function MissionPage() {
       <section className="hero-section text-white">
         <div className="grid gap-7 text-left">
           <h1 className="hero-heading m-0">
-            Mission & About Us
+            About Us
           </h1>
-          <p className="hero-subheading">
-            We're an inclusive student-led organization dedicated to cultivate 
-            and accelerate student talent through education initiatives 
-            and collaborative real-world ML projects.
-          </p>
         </div>
       </section>
 
-      <section className="w-full py-[90px] px-[6vw] grid gap-11 bg-gradient-to-br from-[#f4f7ff] via-[#e8f1ff] to-[#fdfbff]">
-        <Card className="grid gap-6 bg-white rounded-[28px] border border-slate-300/20 shadow-[0_20px_38px_rgba(15,23,42,0.12)] p-12 px-14">
-          <CardHeader>
-            <CardTitle className="text-[36px] font-bold text-slate-900 mb-0">
-              Our members' journey.
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="text-[19px] text-slate-600 leading-[1.8] max-w-[720px] mt-2 flex flex-col gap-6">
-            <p>
-              Our members start with our education initiatives, learning ML fundamentals 
-              and applying them to a beginner project. As they
-              progress, they take on basic DevOps and project management, contributing to our projects.
+      <section className="relative py-15 sm:py-28 bg-gradient-to-br from-[#f4f7ff] via-[#e8f1ff] to-[#fdfbff] overflow-visible">
+        <div className="mx-auto max-w-[1370px] px-6 sm:px-8 xl:px-12">
+
+          {/* Header + Content Container */}
+          <div className="flex flex-col gap-8 max-w-[800px]">
+
+            {/* Title */}
+            <h2 className="text-[42px] font-bold text-slate-900 leading-[1.15] m-0">
+              Mission Statement
+            </h2>
+
+            {/* Main paragraph */}
+            <p className="text-[20px] text-slate-700 leading-[1.75]">
+              We're an inclusive student-led organization dedicated to cultivating 
+              and accelerating student talent through education initiatives and 
+              collaborative real-world ML projects.
             </p>
 
-            <span>Are you a student interested in joining DAML?</span>
+            {/* Subtext */}
+            <p className="text-[18px] text-slate-700 leading-[1.7]">
+              Are you a student interested in joining DAML?
+            </p>
+
+            {/* CTA Button */}
             <Button
               aria-label="Join our mailing list"
-              className="cta-button whitespace-nowrap py-8"
-              size="lg"
-              style={{ width: "260px" }}
+              className="cta-button whitespace-nowrap py-7 px-10 rounded-full bg-blue-600 text-white font-semibold text-base shadow-[0_18px_40px_rgba(2,15,42,0.25)] hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(2,15,42,0.35)] transition-all duration-300 w-fit"
               onClick={() => {
                 if (typeof window !== "undefined") {
-                  window.open("https://docs.google.com/forms/d/e/1FAIpQLSfHy0G3zA2e1HIsOjGbkS08euM6FV3hWEwvxW7vGG_hPRf79g/viewform?usp=dialog");
+                  window.open(
+                    "https://docs.google.com/forms/d/e/1FAIpQLSfHy0G3zA2e1HIsOjGbkS08euM6FV3hWEwvxW7vGG_hPRf79g/viewform?usp=dialog"
+                  );
                 }
               }}
             >
-              Join our mailing list 
+              Join our mailing list
             </Button>
-          </CardContent>
-        </Card>
+
+          </div>
+        </div>
       </section>
+
 
       <section className="relative py-20 sm:py-28 bg-white overflow-y-visible">
         <div className="mx-auto max-w-[110rem] px-6 sm:px-8 xl:px-12 overflow-y-visible">
@@ -331,7 +337,7 @@ export default function MissionPage() {
       </section>
 
       <CallToAction
-        title="Ready to prototype with DAML?"
+        title="Want to collaborate with DAML?"
         description="Contact our teams, share the challenge, the stakeholders we should meet, and the environments we need to plug into."
         primaryButton={{
           text: "Start a project conversation",
@@ -341,7 +347,7 @@ export default function MissionPage() {
           text: "See partnership playbooks",
           href: "/partnerWithUs",
         }}
-        backgroundColor="bg-gradient-to-br from-blue-600 to-purple-600"
+        backgroundColor="bg-gradient-to-br from-[#1a2332] via-[#2a3f5f] to-[#1e3a5f]"
       />
       <Footer />
     </div>

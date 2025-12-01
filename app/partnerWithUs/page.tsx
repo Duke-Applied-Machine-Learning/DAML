@@ -78,7 +78,9 @@ const PartnerWithUs: React.FC = () => {
 
   return (
     <div className="font-sans text-slate-200">
-
+      <div className="w-full bg-yellow-100 text-yellow-800 text-center py-3 px-4 text-sm font-medium">
+        We're still developing this page! We apologize for any inconvenience.
+      </div>
       {/* Hero */}
       <section className="hero-section text-white relative overflow-hidden">
 
@@ -87,7 +89,9 @@ const PartnerWithUs: React.FC = () => {
             <div className="grid gap-[18px]">
               <h1 className="hero-heading m-0 tracking-[0.2px]">Partner With Us</h1>
               <p className="hero-subheading m-0">
-                We&apos;re happy to partner with any company who is interested in building AI solutions or products, expand education initiatives, and/or outreach to our members for opportunities. Partnering with us means to enhance the range of opportunities available for our undergraduate students. Interested in partnering with us?
+                We&apos;re happy to partner with companies interested in building AI/ML solutions, expand education initiatives, and/or outreach to our members for opportunities. Partnering with us means to enhance the range of opportunities available for our undergraduate students. 
+                <br /><br />
+                Interested in partnering with us?
               </p>
               <div className="flex gap-4 items-center flex-wrap">
                 <Button
