@@ -206,34 +206,35 @@ function AnimatedGradient() {
         {/* Action buttons - reduce top margin to tighten further */}
         <div className="mt-6 flex gap-3 pointer-events-auto">
           <Button
-            variant="outline"
-            className="bg-white text-gray-800 font-semibold px-6 py-6 rounded-full border border-slate-300/40 text-base transition-all duration-300 shadow-[0_12px_24px_rgba(15,23,42,0.12)] hover:bg-gray-800 hover:text-white hover:shadow-[0_20px_28px_rgba(15,23,42,0.22)]"
-            onClick={() => {
-              if (typeof window !== "undefined") {
-                window.location.href = "/mission";
-              }
-            }}
-          >
-            Tell me more
-          </Button>
+  variant="outline"
+  className="bg-white text-gray-800 font-semibold px-6 py-6 rounded-full border border-slate-300/40 text-base transition-all duration-300 shadow-[0_12px_24px_rgba(15,23,42,0.12)] hover:bg-gray-800 hover:text-white hover:shadow-[0_20px_28px_rgba(15,23,42,0.22)]"
+  onClick={() => {
+    if (typeof window !== "undefined") {
+      window.location.href = "/mission";
+    }
+  }}
+>
+  Tell me more
+</Button>
 
-          <Button
-            className="
-              bg-blue-600 text-white font-semibold px-6 py-6 rounded-full text-base
-              transition-all duration-300
-              shadow-[0_12px_24px_rgba(15,23,42,0.12)]
-              hover:bg-blue-700 hover:-translate-y-0.5
-              hover:shadow-[0_20px_28px_rgba(15,23,42,0.22)]
-            "
-            onClick={() => {
-              const section = document.getElementById("join-daml");
-              if (!section) return;
+<Button
+  className="
+    bg-blue-600 text-white font-semibold px-6 py-6 rounded-full text-base
+    border border-transparent
+    transition-all duration-300
+    shadow-[0_12px_24px_rgba(15,23,42,0.12)]
+    hover:bg-blue-700 hover:-translate-y-0.5
+    hover:shadow-[0_20px_28px_rgba(15,23,42,0.22)]
+  "
+  onClick={() => {
+    const section = document.getElementById('join-daml');
+    if (!section) return;
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }}
+>
+  Join us
+</Button>
 
-              section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }}
-          >
-            Join us
-          </Button>
 
         </div>
       </div>
