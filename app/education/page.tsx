@@ -245,7 +245,7 @@ export default function Education() {
         </div>
       </section>
 
-      <section className="py-20 px-[6vw] bg-gradient-to-br from-blue-500/8 via-teal-500/8 to-transparent grid gap-8">
+      {/* <section className="py-20 px-[6vw] bg-gradient-to-br from-blue-500/8 via-teal-500/8 to-transparent grid gap-8">
         <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-7">
           {logistics.map((item) => (
             <Card
@@ -267,11 +267,11 @@ export default function Education() {
             </Card>
           ))}
         </div>
-      </section>
+      </section> */}
 
       <CallToAction
         title="Deliver, present, certify"
-        description="Completing workshops, milestones, showcase presentations, and the final exam earns the AITP certification. Certified members flow directly into DAML senior engineering roles and partner-facing pods."
+        description="Completing workshops and completion of the final project earns the AITP certification. Certified members flow directly into DAML senior engineering roles and our project teams."
         primaryButton={{
           text: "Join the mailing list",
           onClick: () => {

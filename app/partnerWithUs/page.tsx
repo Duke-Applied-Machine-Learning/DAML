@@ -89,7 +89,7 @@ const PartnerWithUs: React.FC = () => {
             <div className="grid gap-[18px]">
               <h1 className="hero-heading m-0 tracking-[0.2px]">Partner With Us</h1>
               <p className="hero-subheading m-0">
-                We&apos;re happy to partner with companies interested in building AI/ML solutions, expand education initiatives, and/or outreach to our members for opportunities. Partnering with us means to enhance the range of opportunities available for our undergraduate students. 
+                We&apos;re happy to partner with companies to build AI/ML solutions, gather data insights, expand our education initiatives, and to engage with our members. Partnering with us helps expand opportunities for our undergraduate students. 
                 <br /><br />
                 Interested in partnering with us?
               </p>
@@ -119,40 +119,62 @@ const PartnerWithUs: React.FC = () => {
       <section className="text-slate-900 pt-[120px] pb-[80px] px-[6vw] relative z-[1]">
         <div className="max-w-[1200px] mx-auto relative z-[1]">
           <h2 className="text-[#0b1220] mb-12 text-4xl font-bold">Partnership Opportunities</h2>
-          <div className="grid gap-8 grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
-            <Card className="bg-white text-[#0b1220] border border-slate-900/6 rounded-2xl p-8 shadow-[0_6px_18px_rgba(11,18,32,0.06)] transition-all duration-200 relative overflow-hidden grid gap-3 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-gradient-to-br before:from-white/20 before:to-transparent before:pointer-events-none">
+          <div className="grid gap-8 grid-cols-[repeat(auto-fit,minmax(280px,1fr))] items-stretch">
+            <Card className="h-full flex flex-col bg-white text-[#0b1220] border border-slate-900/6 rounded-2xl p-8 shadow-[0_6px_18px_rgba(11,18,32,0.06)] transition-all duration-200 relative overflow-hidden gap-3 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-gradient-to-br before:from-white/20 before:to-transparent before:pointer-events-none">
               <CardHeader>
-                <CardTitle className="mb-3 text-[#071025] text-2xl">Industry Partnerships</CardTitle>
+                <CardTitle className="mb-3 text-[#071025] text-2xl">DAML Project Partnerships</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="m-0 text-[#0b1220] leading-[1.6]">Collaborate with our PM team to discuss a strategy to develop a ML product. DAML can help by bringing together a team of engineers in Data Science/ML to develop the project.</p>
+              <CardContent className="flex-1">
+                <p className="m-0 text-[#0b1220] leading-[1.6]">
+                  Meet with our PM team for client projects in data and AI/ML.
+                </p>
                 <ul className="list-none mt-4 p-0 grid gap-2.5">
-                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">Project Plan</li>
-                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">EDA Deliverables</li>
-                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">Business Analysis Reports</li>
-                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">Model Prototypes</li>
-                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">Deployed Models</li>
+                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">
+                    Project Plan
+                  </li>
+                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">
+                    EDA Deliverables
+                  </li>
+                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">
+                    Business Analysis Reports
+                  </li>
+                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">
+                    Model Prototypes
+                  </li>
+                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">
+                    Deployed Models
+                  </li>
                 </ul>
               </CardContent>
             </Card>
-            <Card className="bg-white text-[#0b1220] border border-slate-900/6 rounded-2xl p-8 shadow-[0_6px_18px_rgba(11,18,32,0.06)] transition-all duration-200 relative overflow-hidden grid gap-3 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-gradient-to-br before:from-white/20 before:to-transparent before:pointer-events-none">
+
+            <Card className="h-full flex flex-col bg-white text-[#0b1220] border border-slate-900/6 rounded-2xl p-8 shadow-[0_6px_18px_rgba(11,18,32,0.06)] transition-all duration-200 relative overflow-hidden gap-3 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-gradient-to-br before:from-white/20 before:to-transparent before:pointer-events-none">
               <CardHeader>
                 <CardTitle className="mb-3 text-[#071025] text-2xl">Academic Partnerships</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="m-0 text-[#0b1220] leading-[1.6]">Collaborate with us to expand our education initiatives!</p>
+              <CardContent className="flex-1">
+                <p className="m-0 text-[#0b1220] leading-[1.6]">
+                  Collaborate with us to expand our education initiatives!
+                </p>
                 <ul className="list-none mt-4 p-0 grid gap-2.5">
-                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">Data Engineering, Data Science, SWE Concepts</li>
-                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">Software products</li>
+                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">
+                    Data Engineering, Data Science, SWE Concepts
+                  </li>
+                  <li className="flex items-start gap-2 text-[#0b1220] leading-[1.6] before:content-['✓'] before:text-blue-600 before:font-bold before:mt-0.5">
+                    Software products
+                  </li>
                 </ul>
               </CardContent>
             </Card>
-            <Card className="bg-white text-[#0b1220] border border-slate-900/6 rounded-2xl p-8 shadow-[0_6px_18px_rgba(11,18,32,0.06)] transition-all duration-200 relative overflow-hidden grid gap-3 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-gradient-to-br before:from-white/20 before:to-transparent before:pointer-events-none">
+
+            <Card className="h-full flex flex-col bg-white text-[#0b1220] border border-slate-900/6 rounded-2xl p-8 shadow-[0_6px_18px_rgba(11,18,32,0.06)] transition-all duration-200 relative overflow-hidden gap-3 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-gradient-to-br before:from-white/20 before:to-transparent before:pointer-events-none">
               <CardHeader>
                 <CardTitle className="mb-3 text-[#071025] text-2xl">Guest Speakers & Outreach</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="m-0 text-[#0b1220] leading-[1.6]">We can help host guest speakers or cool products to our members!</p>
+              <CardContent className="flex-1">
+                <p className="m-0 text-[#0b1220] leading-[1.6]">
+                  We're happy to host guest speakers and workshops to our members!
+                </p>
               </CardContent>
             </Card>
           </div>
