@@ -341,7 +341,7 @@ export default function MissionPage() {
         description="Contact our teams, share the challenge, the stakeholders we should meet, and the environments we need to plug into."
         primaryButton={{
           text: "Start a project conversation",
-          href: "mailto:renzo.larrea@duke.edu",
+          href: "mailto:dukeappliedmachinelearning@gmail.com",
         }}
         secondaryButton={{
           text: "See partnership opportunities",
