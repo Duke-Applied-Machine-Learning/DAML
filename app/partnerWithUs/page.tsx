@@ -186,7 +186,7 @@ const PartnerWithUs: React.FC = () => {
         <div className="max-w-[1200px] mx-auto relative z-[1]">
           <div className="mb-12">
             <h2 className="text-[#0b1220] mb-6 text-4xl font-bold">ML Consulting</h2>
-            <p className="text-[#0b1220] text-lg leading-[1.7] max-w-3xl">For our client projects, we provide partners with our consultants in ML to discuss strategies to develop ML products into their business.</p>
+            <p className="text-[#0b1220] text-lg leading-[1.7] max-w-3xl">For client projects, our consultants in ML discuss strategies to develop ML products that best impact businesses.</p>
           </div>
 
           <div className="w-full overflow-hidden relative my-12 py-6">
