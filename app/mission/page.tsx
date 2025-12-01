@@ -344,7 +344,7 @@ export default function MissionPage() {
           href: "mailto:renzo.larrea@duke.edu",
         }}
         secondaryButton={{
-          text: "See partnership playbooks",
+          text: "See partnership opportunities",
           href: "/partnerWithUs",
         }}
         backgroundColor="bg-gradient-to-br from-[#1a2332] via-[#2a3f5f] to-[#1e3a5f]"
