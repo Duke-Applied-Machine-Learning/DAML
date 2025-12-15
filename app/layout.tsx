@@ -27,6 +27,7 @@ const navLinks = [
   { href: "/mission", label: "Mission" },
   { href: "/education", label: "Training" },
   { href: "/students", label: "Team" },
+  // { href: "/portfolio", label: "Portfolio" },
   { href: "/partnerWithUs", label: "Partner With Us" },
 ];
 

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import Footer from "@/components/layout/Footer";
 import CallToAction from "@/components/sections/CallToAction";
+import DevelopmentBanner from "@/components/ui/development-banner";
 
 interface TechIconProps {
   src: string;
@@ -78,9 +79,7 @@ const PartnerWithUs: React.FC = () => {
 
   return (
     <div className="font-sans text-slate-200">
-      <div className="w-full bg-yellow-100 text-yellow-800 text-center py-3 px-4 text-sm font-medium">
-        We're still developing this page! We apologize for any inconvenience.
-      </div>
+      <DevelopmentBanner />
       {/* Hero */}
       <section className="hero-section text-white relative overflow-hidden">
 
