@@ -23,46 +23,38 @@ export default function CallToAction({
   description,
   primaryButton,
   secondaryButton,
-  backgroundColor = "bg-gradient-to-br from-[#040c24] to-[#0b2f5c]",
+  backgroundColor = "bg-brand-navy",
   maxWidth = "900px",
 }: CallToActionProps) {
   return (
-    <section className={`py-[68px] px-[6vw] ${backgroundColor} text-white`}>
-      <div className="mx-auto grid gap-[18px] text-center" style={{ maxWidth }}>
-        <h2 className="text-[30px] font-bold m-0">{title}</h2>
-        <p className="text-[17px] leading-[1.7] text-slate-200/85">
-          {description}
-        </p>
+    <section className={`section on-dark cta-mesh ${backgroundColor}`}>
+      <div
+        className="container-content mx-auto grid gap-5 text-center animate-fade-up"
+        style={{ maxWidth }}
+      >
+        <h2 className="h2 m-0">{title}</h2>
+        <p className="hero-sub m-0 opacity-90">{description}</p>
         <div className="flex justify-center gap-4 flex-wrap">
           <Button
             asChild={!!primaryButton.href}
-            className="bg-white text-blue-700 rounded-full px-6 py-6 font-semibold hover:bg-white/90"
+            variant="cta"
             onClick={primaryButton.onClick}
           >
             {primaryButton.href ? (
-              <a href={primaryButton.href}>
-                {primaryButton.text}
-              </a>
+              <a href={primaryButton.href}>{primaryButton.text}</a>
             ) : (
-              <span>
-                {primaryButton.text}
-              </span>
+              <span>{primaryButton.text}</span>
             )}
           </Button>
           <Button
             asChild={!!secondaryButton.href}
-            variant="outline"
-            className="bg-white/12 border-white/35 rounded-full px-6 py-6 font-semibold text-white hover:bg-white/20 hover:text-white"
+            variant="cta-outline-dark"
             onClick={secondaryButton.onClick}
           >
             {secondaryButton.href ? (
-              <a href={secondaryButton.href}>
-                {secondaryButton.text}
-              </a>
+              <a href={secondaryButton.href}>{secondaryButton.text}</a>
             ) : (
-              <span>
-                {secondaryButton.text}
-              </span>
+              <span>{secondaryButton.text}</span>
             )}
           </Button>
         </div>

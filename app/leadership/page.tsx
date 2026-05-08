@@ -126,58 +126,29 @@ const leaders = [
 export default function Leadership() {
   const [hovered, setHovered] = useState<number | null>(null);
   return (
-    <div
-      style={{
-        fontFamily: "Roboto, sans-serif",
-        background: "#fff",
-        minHeight: "100vh",
-      }}
-    >
+    <div className="font-sans bg-white min-h-screen">
       {/* Primary Image */}
-      <div style={{ width: "100%", marginBottom: 32 }}>
+      <div className="w-full mb-8">
         <Image
           src="/dukestudents.jpg"
           alt="DAML Leadership Team"
           width={1920}
           height={400}
-          style={{
-            width: "100%",
-            height: 320,
-            objectFit: "cover",
-            borderRadius: 0,
-            display: "block",
-          }}
+          className="w-full h-80 object-cover block"
         />
       </div>
       {/* Title and Subtitle */}
-      <div style={{ textAlign: "center", marginBottom: 32, marginTop: 100 }}>
-        <h1
-          style={{
-            fontSize: 40,
-            fontWeight: 700,
-            color: "#012169",
-            marginBottom: 8,
-          }}
-        >
+      <div className="container-content section text-center">
+        <h1 className="h1 text-slate-900 mb-2">
           DAML Leadership
         </h1>
-        <h2 style={{ fontSize: 22, color: "#222", fontWeight: 400, margin: 0 }}>
+        <h2 className="hero-sub text-slate-700 m-0">
           Meet the team driving innovation, collaboration, and impact at Duke
           Applied Machine Learning.
         </h2>
       </div>
       {/* Grid of Leaders */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
-          gap: 48,
-          maxWidth: 1800,
-          margin: "0 auto",
-          marginTop: 100,
-          padding: "0 32px 64px 32px",
-        }}
-      >
+      <div className="container-wide section mx-auto grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-12">
         {leaders.map((leader, idx) => (
           <div
             key={leader.name}

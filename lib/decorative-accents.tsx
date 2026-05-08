@@ -24,10 +24,10 @@ export function DotGrid({
   className,
   intensity = "subtle",
   size = 24,
-  color = "rgba(59, 130, 246, 0.15)",
+  color = "rgba(0, 83, 155, 0.15)",
   ...props
 }: DotGridProps) {
-  const opacity = intensity === "subtle" ? 0.08 : 0.15;
+  const opacity = intensity === "subtle" ? 0.07 : 0.13;
   const dotColor = color.replace(/[\d.]+\)$/, `${opacity})`);
 
   return (
@@ -60,16 +60,16 @@ export function GeometricLines({
   opacity = 0.1,
   ...props
 }: GeometricLinesProps) {
-  const blueColor = `rgba(59, 130, 246, ${opacity})`;
-  const purpleColor = `rgba(147, 51, 234, ${opacity})`;
+  const royalColor = `rgba(0, 83, 155, ${opacity})`;
+  const copperColor = `rgba(200, 78, 0, ${opacity * 0.6})`;
 
   return (
     <div
       className={cn("absolute inset-0 pointer-events-none", className)}
       style={{
         backgroundImage: `
-          linear-gradient(${angle}deg, ${blueColor} 1px, transparent 1px),
-          linear-gradient(${-angle}deg, ${purpleColor} 1px, transparent 1px)
+          linear-gradient(${angle}deg, ${royalColor} 1px, transparent 1px),
+          linear-gradient(${-angle}deg, ${copperColor} 1px, transparent 1px)
         `,
         backgroundSize: `${spacing}px ${spacing}px`,
       }}
@@ -107,16 +107,16 @@ export function GradientMeshOrb({
     right: "80% 50%",
   };
 
-  const blueColor = `rgba(59, 130, 246, ${opacity})`;
-  const purpleColor = `rgba(147, 51, 234, ${opacity * 0.75})`;
+  const royalColor = `rgba(0, 83, 155, ${opacity})`;
+  const copperColor = `rgba(200, 78, 0, ${opacity * 0.5})`;
 
   return (
     <div
       className={cn("absolute inset-0 pointer-events-none", className)}
       style={{
         background: `
-          radial-gradient(circle at ${positionMap[position]}, ${blueColor} 0%, transparent 50%),
-          radial-gradient(circle at ${position === "left" ? "80%" : position === "right" ? "20%" : "70%"} 50%, ${purpleColor} 0%, transparent 50%)
+          radial-gradient(circle at ${positionMap[position]}, ${royalColor} 0%, transparent 50%),
+          radial-gradient(circle at ${position === "left" ? "80%" : position === "right" ? "20%" : "70%"} 50%, ${copperColor} 0%, transparent 50%)
         `,
       }}
       {...props}
@@ -137,7 +137,7 @@ interface SlantedDividerProps extends React.HTMLAttributes<HTMLDivElement> {
 export function SlantedDivider({
   className,
   angle = -15,
-  color = "rgba(59, 130, 246, 0.3)",
+  color = "rgba(0, 83, 155, 0.2)",
   thickness = 1,
   ...props
 }: SlantedDividerProps) {

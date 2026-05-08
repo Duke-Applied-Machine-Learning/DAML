@@ -1,19 +1,84 @@
+"use client";
+
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import CallToAction from "@/components/sections/CallToAction";
 import Footer from "@/components/layout/Footer";
-import { FaBriefcase, FaUsers, FaGraduationCap, FaFolder } from "react-icons/fa";
+import PhotoSlider from "@/components/sections/PhotoSlider";
+import { ProjectCard } from "@/components/projects/ProjectCard";
+import { projects } from "../../data/projects";
+import { Lightbulb, Users, FileCheck } from "lucide-react";
 
-/**
- * AnimatedRotator
- * - delay: ms between swaps (default 3000)
- * - animMs: ms for swipe animation (default 600)
- * Uses Tailwind classes for styling
- */
+function FadeInOnScroll({
+  children,
+  delay = 0,
+  onVisibleOnce,
+  className,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  onVisibleOnce?: () => void;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            if (onVisibleOnce) onVisibleOnce();
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      style={visible ? { transitionDelay: `${50 + delay}ms` } : undefined}
+      className={cn(
+        "transition-all duration-500 ease-out",
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
+function useStaggerOnScroll() {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const elements = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-stagger]")
+    );
+    if (!elements.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("in-view");
+        });
+      },
+      { threshold: 0.15 }
+    );
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+}
+
 function AnimatedRotator({
   items,
   delay = 3000,
@@ -31,57 +96,36 @@ function AnimatedRotator({
   const clearPrevTimeoutRef = useRef<number | null>(null);
   const intervalRef = useRef<number | null>(null);
 
-  // Interval/timer for swapping
   useEffect(() => {
     if (!items || items.length <= 1) return;
-
-    // clear existing timers
-    if (intervalRef.current) {
-      window.clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-    if (clearPrevTimeoutRef.current) {
-      window.clearTimeout(clearPrevTimeoutRef.current);
-      clearPrevTimeoutRef.current = null;
-    }
+    if (intervalRef.current) window.clearInterval(intervalRef.current);
+    if (clearPrevTimeoutRef.current) window.clearTimeout(clearPrevTimeoutRef.current);
 
     const normalDelay = delay;
-const endPause = delay * 2; // 👈 2× longer pause after last item (adjust as you like)
+    const endPause = delay * 2;
 
-const runCycle = () => {
-  setPrev(indexRef.current);
-  const next = (indexRef.current + 1) % items.length;
-  setIndex(next);
-  indexRef.current = next;
+    const runCycle = () => {
+      setPrev(indexRef.current);
+      const next = (indexRef.current + 1) % items.length;
+      setIndex(next);
+      indexRef.current = next;
+      if (clearPrevTimeoutRef.current) window.clearTimeout(clearPrevTimeoutRef.current);
+      clearPrevTimeoutRef.current = window.setTimeout(() => {
+        setPrev(null);
+        clearPrevTimeoutRef.current = null;
+      }, animMs);
+      const nextDelay = next === 0 ? endPause : normalDelay;
+      intervalRef.current = window.setTimeout(runCycle, nextDelay);
+    };
 
-  // clear prev after animation completes
-  if (clearPrevTimeoutRef.current) {
-    window.clearTimeout(clearPrevTimeoutRef.current);
-  }
-  clearPrevTimeoutRef.current = window.setTimeout(() => {
-    setPrev(null);
-    clearPrevTimeoutRef.current = null;
-  }, animMs);
-
-  // schedule the next run with variable delay
-  const nextDelay = next === 0 ? endPause : normalDelay;
-  intervalRef.current = window.setTimeout(runCycle, nextDelay);
-};
-
-// start the first cycle
-intervalRef.current = window.setTimeout(runCycle, delay);
-
-return () => {
-  if (intervalRef.current) window.clearTimeout(intervalRef.current);
-  if (clearPrevTimeoutRef.current) window.clearTimeout(clearPrevTimeoutRef.current);
-};
-
-    
+    intervalRef.current = window.setTimeout(runCycle, delay);
+    return () => {
+      if (intervalRef.current) window.clearTimeout(intervalRef.current);
+      if (clearPrevTimeoutRef.current) window.clearTimeout(clearPrevTimeoutRef.current);
+    };
   }, [items.length, delay, animMs]);
 
-  useEffect(() => {
-    indexRef.current = index;
-  }, [index]);
+  useEffect(() => { indexRef.current = index; }, [index]);
 
   return (
     <span
@@ -93,11 +137,7 @@ return () => {
         const cls =
           i === index ? "rot-item slide-in" : i === prev ? "rot-item slide-out" : "rot-item";
         return (
-          <span 
-            key={text + i} 
-            className={cls}
-            style={{ animationDuration: `${animMs}ms` }}
-          >
+          <span key={text + i} className={cls} style={{ animationDuration: `${animMs}ms` }}>
             {text}
           </span>
         );
@@ -107,713 +147,321 @@ return () => {
 }
 export { AnimatedRotator };
 
-// Add Roboto font and animations
-if (typeof window !== "undefined") {
-  const link = document.createElement("link");
-  link.href =
-    "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap";
-  link.rel = "stylesheet";
-  document.head.appendChild(link);
-}
-
-/* ---- Existing AnimatedGradient (small edit only to include rotator) ---- */
-function AnimatedGradient() {
-  const numCircles = 3;
-  const [positions, setPositions] = useState(
-    Array(numCircles).fill({ x: 50, y: 50 })
-  );
-  const [opacity, setOpacity] = useState(1);
-  const mouseRef = useRef({ x: 50, y: 50 });
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let animationId: number;
-    const animate = () => {
-      setPositions((prev) =>
-        prev.map((pos, i) => {
-          const easing = 0.1 / (i + 1);
-          const nx = pos.x + (mouseRef.current.x - pos.x) * easing;
-          const ny = pos.y + (mouseRef.current.y - pos.y) * easing;
-          return { x: nx, y: ny };
-        })
-      );
-      animationId = requestAnimationFrame(animate);
-    };
-    animate();
-    return () => cancelAnimationFrame(animationId);
-  }, []);
-
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    mouseRef.current = {
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
-    };
-    setOpacity(1);
-  }
-  function handleMouseLeave() {}
-  function handleMouseEnter() {
-    setOpacity(1);
-  }
-
-  const gradientColors = ["#ff7f6e", "#ff6f61", "#ff9478", "#3d5a80"];
-
+function HeroSection() {
   return (
-  <div
-    ref={containerRef}
-    className="w-full h-[120vh] min-h-[900px] relative overflow-hidden"
-    onMouseMove={handleMouseMove}
-    onMouseLeave={handleMouseLeave}
-    onMouseEnter={handleMouseEnter}
-  >
-    {/* Background gradient layers */}
-    <div className="absolute inset-0 w-full h-full overflow-hidden bg-gradient-to-br from-[#1e3a5f] via-[#2a4d7c] to-[#ff6f61] pointer-events-none z-0">
-      {positions.map((pos, i) => {
-        const offsetX = i * 10;
-        const offsetY = i * 5;
-        const color = gradientColors[i % gradientColors.length];
-        return (
-          <div
-            key={i}
-            className="absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-[800ms] ease-in-out"
-            style={{
-              opacity,
-              background: `radial-gradient(circle at ${pos.x + offsetX}% ${
-                pos.y + offsetY
-              }%, ${color}80 0%, ${color}44 40%, transparent 70%)`,
-            }}
-          />
-        );
-      })}
-    </div>
+    <div
+      className="mouse-glow-wrapper w-full relative bg-[#0d4f7a]"
+    >
+      {/* Background image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/hero/daml_background.png"
+          alt="DAML hero background"
+          fill
+          priority
+          quality={100}
+          className="object-cover"
+          sizes="100vw"
+        />
+      </div>
 
-    {/* Foreground content */}
-    <div className="absolute inset-0 flex flex-col items-start justify-center font-bold text-[72px] text-white z-10 pointer-events-none pl-10">
-      {/* Hero title + rotating subtitle - wrapped to avoid clipping */}
-      <div className="pointer-events-auto max-w-[calc(100%-80px)] relative overflow-visible z-[90] flex flex-col gap-1.5">
-        <div className="font-roboto font-bold text-[80px] text-white leading-[1.1] m-0 pointer-events-none">
-          Duke Applied
-          <br />
-          Machine Learning
+
+      <div className="w-full hero-home relative">
+        <div className="hero-home-inner absolute inset-0 flex flex-col items-start z-[2] pointer-events-none px-6 md:px-8">
+          <div className="pointer-events-auto max-w-[calc(100%-80px)] relative overflow-visible z-[90] flex flex-col gap-3">
+            <div className="hero-content">
+              <h1 className="h1 m-0 pointer-events-none">
+                Duke Applied Machine Learning
+              </h1>
+              <p className="hero-sub m-0 mt-4">
+                An open-membership student org dedicated to enhancing ML education at Duke.
+              </p>
+            </div>
+            <div className="mt-6 flex flex-col gap-3 pointer-events-auto sm:flex-row">
+              <Button
+                variant="cta"
+                onClick={() => {
+                  document.getElementById("join-daml")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
+              >
+                Join us
+              </Button>
+              <Button
+                variant="cta-outline-dark"
+                onClick={() => { if (typeof window !== "undefined") window.location.href = "/mission"; }}
+              >
+                Learn more
+              </Button>
+            </div>
+          </div>
         </div>
+      </div>
 
-        {/* Rotator placed immediately below the title */}
-        <div className="mt-2 font-roboto text-[28px] font-medium text-[#d9d5d5] max-w-[800px] leading-[1.4]">
-          An open-membership student org dedicated to enhance ML education at Duke
-        </div>
-
-        {/* Action buttons - reduce top margin to tighten further */}
-        <div className="mt-6 flex gap-3 pointer-events-auto">
-          <Button
-  variant="outline"
-  className="bg-white text-gray-800 font-semibold px-6 py-6 rounded-full border border-slate-300/40 text-base transition-all duration-300 shadow-[0_12px_24px_rgba(15,23,42,0.12)] hover:bg-gray-800 hover:text-white hover:shadow-[0_20px_28px_rgba(15,23,42,0.22)]"
-  onClick={() => {
-    if (typeof window !== "undefined") {
-      window.location.href = "/mission";
-    }
-  }}
->
-  Tell me more
-</Button>
-
-<Button
-  className="
-    bg-blue-600 text-white font-semibold px-6 py-6 rounded-full text-base
-    border border-transparent
-    transition-all duration-300
-    shadow-[0_12px_24px_rgba(15,23,42,0.12)]
-    hover:bg-blue-700 hover:-translate-y-0.5
-    hover:shadow-[0_20px_28px_rgba(15,23,42,0.22)]
-  "
-  onClick={() => {
-    const section = document.getElementById('join-daml');
-    if (!section) return;
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }}
->
-  Join us
-</Button>
-
-
+      {/* Stats in normal flow — centered, never clipped */}
+      <div className="relative z-10 w-full px-6 md:px-8 pb-16 pt-8 pointer-events-auto">
+        <div className="hero-stats grid grid-cols-1 md:grid-cols-3 max-w-2xl mx-auto">
+          {heroStats.map((stat, i) => (
+            <div
+              key={stat.label}
+              className={cn(
+                "stats-block md:border-l md:border-white/20 first:border-l-0 px-6 md:px-10",
+                i > 0 && "border-t border-white/20 md:border-t-0 pt-4 md:pt-0"
+              )}
+            >
+              <span className="stats-value">{stat.value}</span>
+              <span className="stats-label">{stat.label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
-  </div>
-);
+  );
 }
-/* ----------------- rest of your original file unchanged ----------------- */
-
-const statsCards = [
-  {
-    icon: FaBriefcase,
-    alt: "Active Partners",
-    title: "Collaboration with Duke Fuqua and Bass Connections Projects.",
-    description:
-      "We work with clients to develop AI solutions that impact their businesses, in collaboration with product managers.",
-  },
-  {
-    icon: FaUsers,
-    alt: "Student Engineers",
-    title: "150+ Members in 2025-2026 Fall Cohort",
-    description:
-      "Our newest members are currently learning ML foundations from our experienced executives.",
-  },
-  {
-    icon: FaGraduationCap,
-    alt: "Areas of Expertise",
-    title: "3 Areas of Expertise",
-    description:
-      "Divisions in Data science, Software Engineering, and Hardware.",
-  },
-  {
-    icon: FaFolder,
-    alt: "Innovative Projects",
-    title: "Innovative Projects",
-    description:
-      "External partners deliver live use cases each semester, so every team graduates with a shipped solution.",
-  },
-];
-
-const heroStats = [
-  { value: "10+", label: "Active collaborations" },
-  { value: "700+", label: "Student innovators" },
-  { value: "3", label: "Specialized tracks" },
-];
-
-const educationTracks = [
-  {
-    title: "Foundations Bootcamp",
-    description:
-      "An eight-week ML fundamentals course where new members learn Data Science and program their first ML projects.",
-    stat: "120+ certificates earned in 2024",
-  },
-  {
-    title: "DevOps Workshops",
-    description:
-      "Hands-on deep dives into deploying ML solutions through containerization, CI/CD pipelines, and more into an UI platform.",
-    stat: "24 peer-led sessions each semester",
-  },
-  {
-    title: "Mentorship",
-    description:
-      "Office hours pair first-years wtih our experienced members.",
-    stat: "90% of mentees ship client work by spring",
-  },
-];
 
 const clientValueProps = [
   {
     title: "ML Consulting",
-    detail:
-      "Our team of Product Managers and top Division Leads are happy to meet with partners to discuss ML projects: incorporating KPIs and ML expertise to your business.",
+    icon: Lightbulb,
+    detail: "Our teams scope ML projects and define clear, measurable outcomes & action plans.",
   },
   {
-    title: "DAML Teams Lead Development",
-    detail:
-      "We match a team of our Engineers to each partner for client projects. Partners get top Duke CS Talent, and our members get real-world experience.",
+    title: "Eng. Teams",
+    icon: Users,
+    detail: "We pair dedicated engineering teams with partner organizations, bringing Duke's CS talent to tackle real-world ML problems.",
   },
   {
-    title: "Deliverables & Documentation",
-    detail:
-      "Our consultants provide an in-depth project plan, DAML teams provide data analysis reports, model prototypes & reports on performance, and deploys models along with user guides.",
-  }
+    title: "Deliverables",
+    icon: FileCheck,
+    detail: "Partners receive project plans, EDA reports, and working model prototypes at defined milestones.",
+  },
 ];
 
-const programProjects = [
+const heroStats = [
+  { value: "70+", label: "Members" },
+  { value: "20+", label: "Projects" },
+  { value: "7", label: "Years" },
+];
+
+const whatWeDoItems = [
   {
-    title: "Legislator Chatbot",
-    contributors: "Jai Kasera",
-    term: "Spring 2024",
-    status: "Completed",
-    link: "https://github.com/jaikasera/Legislator-Chatbot",
-    description:
-      "Retrieval-augmented chatbot that surfaces the latest Senate bills, hearings, and votes by scraping and indexing US Congress data for precise policy answers.",
+    id: "internal-projects",
+    label: "Internal",
+    title: "Internal Projects",
+    description: "Our students lead personal projects that explore new ideas and research-inspired experiments.",
   },
   {
-    title: "AI Chess Engine",
-    contributors: "Haiyan Wang, Benjamin Yan, Jai Kasera",
-    term: "Spring 2025",
-    status: "In Progress",
-    link: "https://github.com/benjaminyan1/chess-engine",
-    description:
-      "PyTorch engine inspired by AlphaZero that learns entirely via self-play using deep reinforcement learning and Monte Carlo Tree Search.",
-  },
-  {
-    title: "Modeling Diseases in Corn Leaves Using Computer Vision",
-    contributors:
-      "Sam Borremans, Samuel Orellana Mateo, Yash Singam, Samir Travers, Benjamin Yan",
-    term: "Spring 2024",
-    status: "Completed",
-    link: "https://github.com/benjaminyan1/CV-Corn-Disease-Detection",
-    description:
-      "Compared CNN architectures like ResNet, EfficientNet, and ShuffleNet while mitigating background bias in the Maize Leaf Disease dataset.",
-  },
-  {
-    title: "Hate Speech Detection",
-    contributors: "Brian Chen, Arthur Zhao, Darian Salehi, Jai Kasera",
-    term: "Fall 2023",
-    status: "Completed",
-    description:
-      "LSTM and BERT-driven classifier that flags toxic Twitter content, supporting safer communities through high-accuracy moderation tooling.",
-  },
-  {
-    title: "F1 Driver Positions Gained",
-    contributors: "Kevin Mao",
-    term: "Summer 2025",
-    status: "In Progress",
-    link: "https://github.com/kevinmao660/f1-prediction",
-    description:
-      "FastF1, XGBoost, and SHAP-powered model predicting whether a driver will finish ahead of their grid start using weather, pit strategies, and historical performance.",
+    id: "social-preprofessional",
+    label: "Social",
+    title: "Community & Events",
+    description: "Events, alumni connections, and recruiting touchpoints that extend the DAML network.",
   },
 ];
 
 export default function Homepage() {
+  useStaggerOnScroll();
+  const featuredProjects = projects.filter((p) => p.tier === "featured");
+  const [featuredStartIndex, setFeaturedStartIndex] = useState(0);
+  const [isCarouselAnimating, setIsCarouselAnimating] = useState(false);
+  const [carouselDirection, setCarouselDirection] = useState<"next" | "prev" | null>(null);
+  const [shouldAnimateFeaturedOnce, setShouldAnimateFeaturedOnce] = useState(false);
+  const featuredAnimationDoneRef = useRef(false);
+
+  const visibleFeaturedProjects =
+    featuredProjects.length <= 3
+      ? featuredProjects
+      : Array.from({ length: 3 }, (_, offset) => {
+          return featuredProjects[(featuredStartIndex + offset) % featuredProjects.length];
+        });
+
+  const handleCarouselStep = (direction: "next" | "prev") => {
+    if (!featuredProjects.length || isCarouselAnimating) return;
+    setCarouselDirection(direction);
+    setIsCarouselAnimating(true);
+    const step = direction === "next" ? 1 : -1;
+    window.setTimeout(() => {
+      setFeaturedStartIndex((prev) => (prev + step + featuredProjects.length) % featuredProjects.length);
+      setIsCarouselAnimating(false);
+    }, 180);
+  };
+
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      {/* Hero/Carousel */}
+    <div className="min-h-screen flex flex-col">
+      {/* Hero */}
       <section className="flex flex-col relative">
-        <AnimatedGradient />
+        <HeroSection />
       </section>
-      {/* Work with us Section */}
-      <section className="bg-gradient-to-br from-[#1e3a5f] via-[#2d4f93] to-[#4b74c4] text-slate-50 py-10 px-[6vw] mt-0 w-full flex flex-row items-center gap-50 max-md:flex-col max-md:items-start justify-center">
-        {/* Left side: Title */}
-        <div className="flex-shrink-0">
-          <h2 className="text-[2.5rem] font-extrabold text-slate-50 m-0 tracking-[-0.02em]">
-            Work With Us!
-          </h2>
-        </div>
 
-        {/* Right side: Text and button */}
-        <div className="flex flex-col items-end gap-5 flex-1 max-w-[600px]">
-          <p className="text-[1.15rem] text-slate-50/95 leading-[1.6] m-0 text-right">
-            We're eager to partner with organizations, researchers, and individuals who want to enhance ML education.
-            From client projects to educational ideas and outreach, your support helps our community grow!
-          </p>
-
-          <Button
-            aria-label="Work with us - open contact"
-            className="bg-white border-none rounded-full px-7 py-6 text-base font-bold text-[#04263f] shadow-[0_18px_40px_rgba(2,15,42,0.45)] transition-all duration-[220ms] ease-in-out w-fit hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(2,15,42,0.5)] hover:text-white"
-            onClick={() => {
-              if (typeof window !== "undefined") {
-                window.location.href = "mailto:dukeappliedmachinelearning@gmail.com";
-              }
-            }}
-          >
-            Contact Us
-          </Button>
-        </div>
-      </section>
-      {/* About DAML Section */}
-      <section className="bg-gradient-to-br from-[#040b1f] via-[#0b1f3d] to-[#123263] py-[100px] px-[6vw] text-slate-50">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-12 items-center">
-          <div className="grid gap-6">
-            <span className="text-xs tracking-[4px] font-semibold uppercase text-blue-300/75">
-              Who we are
-            </span>
-            <h2 className="text-[44px] font-bold leading-[1.1] m-0">
-              Inclusive machine learning community powered by Duke talent.
-            </h2>
-            <p className="text-lg leading-[1.75] text-slate-200/88 max-w-[620px]">
-              Duke Applied Machine Learning (DAML) is a student-led organization
-              that pairs education, research, and client delivery. We help
-              curious students become consultants who can design and deploy
-              ML systems, lead projects, and collaborate with partners
-              across Duke and beyond.
-            </p>
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5">
-              {heroStats.map((stat) => (
-                <Card
-                  key={stat.label}
-                  className="rounded-3xl p-6 px-6 bg-gradient-to-br from-blue-300/16 to-blue-500/8 border border-blue-300/25 shadow-[0_24px_55px_rgba(3,14,35,0.35)] grid gap-1.5 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-[0_32px_70px_rgba(3,14,35,0.45)]"
-                >
-                  <CardContent className="p-0">
-                    <span className="text-[32px] font-bold text-slate-50 block">
-                      {stat.value}
-                    </span>
-                    <span className="text-sm text-slate-200/85 tracking-[0.4px] block">
-                      {stat.label}
-                    </span>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-          <div className="relative rounded-[32px] overflow-hidden shadow-[0_35px_90px_rgba(5,17,42,0.45)] min-h-[420px]">
-            <Image
-              src="/prattschoolofeng.jpg"
-              fill
-              className="object-cover object-center"
-              alt="Pratt School of Engineering"
-              priority
-            />
-          </div>
-        </div>
-      </section>
-      {/* Impact Metrics
-      <section
-        style={{
-          background: "#081231",
-          padding: "96px 24px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            display: "grid",
-            gap: 48,
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 18,
-              maxWidth: 680,
-              color: "#e2e8f0",
-            }}
-          >
-            <span
-              style={{
-                fontSize: 12,
-                letterSpacing: 4,
-                fontWeight: 600,
-                textTransform: "uppercase",
-                color: "rgba(148, 197, 255, 0.75)",
-              }}
-            >
-              Impact
-            </span>
-            <h2
-              style={{
-                fontSize: 36,
-                fontWeight: 700,
-                color: "#f8fafc",
-                lineHeight: 1.15,
-              }}
-            >
-              Our campus footprint keeps expanding every semester.
-            </h2>
-            <p
-              style={{
-                fontSize: 18,
-                lineHeight: 1.7,
-                color: "rgba(241, 245, 249, 0.78)",
-              }}
-            >
-            </p>
-          </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-              gap: 28,
-            }}
-          >
-            {statsCards.map((card, idx) => (
-              <div
-                key={card.title}
-                style={{
-                  position: "relative",
-                  borderRadius: 24,
-                  padding: "32px 28px",
-                  background: "rgba(12, 20, 43, 0.65)",
-                  border: "1px solid rgba(148, 163, 184, 0.25)",
-                  boxShadow: "0 28px 60px rgba(8, 20, 53, 0.4)",
-                  transition:
-                    "transform 0.35s ease, box-shadow 0.35s ease, border 0.35s ease",
-                  animation: "riseFade 0.8s ease-out both",
-                  animationDelay: `${0.08 * idx}s`,
-                  color: "#f8fafc",
-                }}
-                onMouseEnter={(event) => {
-                  event.currentTarget.style.transform = "translateY(-6px)";
-                  event.currentTarget.style.boxShadow =
-                    "0 40px 80px rgba(8, 20, 53, 0.55)";
-                  event.currentTarget.style.border =
-                    "1px solid rgba(251, 113, 133, 0.6)";
-                }}
-                onMouseLeave={(event) => {
-                  event.currentTarget.style.transform = "translateY(0)";
-                  event.currentTarget.style.boxShadow =
-                    "0 28px 60px rgba(8, 20, 53, 0.4)";
-                  event.currentTarget.style.border =
-                    "1px solid rgba(148, 163, 184, 0.25)";
-                }}
-              >
-                <div
-                  style={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: 18,
-                    background:
-                      "linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(251, 113, 133, 0.25))",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginBottom: 24,
-                    boxShadow: "0 12px 30px rgba(37, 99, 235, 0.25)",
-                  }}
-                >
-                  {(() => {
-                    const IconComponent = card.icon;
-                    return IconComponent ? (
-                      <IconComponent
-                        size={34}
-                        style={{
-                          filter:
-                            "invert(92%) sepia(4%) saturate(329%) hue-rotate(178deg) brightness(108%) contrast(95%)",
-                          color: "currentColor",
-                        }}
-                        aria-label={card.alt}
-                      />
-                    ) : null;
-                  })()}
-                </div>
-                <h3
-                  style={{
-                    fontSize: 20,
-                    fontWeight: 600,
-                    marginBottom: 12,
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {card.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: 16,
-                    lineHeight: 1.6,
-                    color: "rgba(226, 232, 240, 0.8)",
-                  }}
-                >
-                  {card.description}
+      {/* What We Do — header */}
+      <section className="bg-surface-base section-lg pb-0 relative z-[2]">
+        <div className="container-content mx-auto">
+          <FadeInOnScroll>
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center section-title-spacing">
+              <div className="md:-translate-y-[20%]">
+                <p className="kicker mb-3">What we do</p>
+                <h2 className="section-heading">
+                  An inclusive pre-professional ML community
+                </h2>
+                <p className="hero-sub mt-4">
+                  We are a student-led organization that empowers education, research, and applied work in machine learning. From training and hands-on projects to community events, we help student engineers gain real ML experience, project leadership, and collaboration with partners across Duke and beyond.
                 </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-      {/* Education Pathways */}
-      <section className="py-[110px] px-[6vw] bg-white">
-        <div className="max-w-[1400px] mx-auto grid gap-8">
-          <div className="flex flex-col gap-3 max-w-[800px]">
-            <span className="text-xs tracking-[4px] font-semibold uppercase text-blue-600">
-              Education Pathways
-            </span>
-            <h2 className="text-[44px] font-bold leading-[1.1] m-0">
-              Programs that cultivate machine learning talent at Duke.
-            </h2>
-          </div>
-          <div className="flex justify-center py-2">
-            <div className="relative w-full max-w-[1100px] min-h-[320px] rounded-[20px] overflow-hidden shadow-[0_20px_48px_rgba(15,23,42,0.14)]">
-              <Image
-                src="/IMG_9027.png"
-                alt="Hands-on learning during the education pathways program"
-                fill
-                className="object-cover object-center"
-                sizes="(min-width: 1280px) 820px, 100vw"
-                priority
-              />
+              <div className="flex flex-col gap-2">
+                <PhotoSlider className="aspect-[4/3]" />
+                <p className="text-sm text-slate-500 text-center italic">A large thank you to the teams that have presented at our 2026 showcase!</p>
+              </div>
             </div>
+          </FadeInOnScroll>
+        </div>
+      </section>
+
+      {/* Education Track */}
+      <section className="py-12 md:py-16 px-[6vw] on-dark bg-brand-navy-gradient">
+        <div className="container-content mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+            {/* Text */}
+            <FadeInOnScroll>
+              <div className="flex flex-col gap-6">
+                <div>
+                  <p className="kicker mb-3">Education</p>
+                  <h2 className="section-heading">The AI Fundamentals Training Program</h2>
+                </div>
+                <p className="hero-sub">
+                    DAML&apos;s AI Training Program (AITP) is the structured entry point for members to become engineers within the organization. The program takes members from ML fundamentals through modern deep learning systems, with a focus on real deliverables and project readiness.                </p>
+                <ul className="flex flex-col gap-3">
+                  {[
+                    "8-week AI Training Program — from regression and clustering through transformers and LLMs",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <svg className="flex-shrink-0 w-5 h-5 mt-0.5 text-[var(--color-royal)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span className="hero-sub">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div>
+                  <Button variant="cta" asChild>
+                    <a href="/recruitment">Explore our curriculum</a>
+                  </Button>
+                </div>
+              </div>
+            </FadeInOnScroll>
+
+            {/* Image */}
+            <FadeInOnScroll delay={120} className="h-full">
+              <div className="relative rounded-3xl overflow-hidden h-full min-h-[240px]">
+                <Image
+                  src="/IMG_9027.png"
+                  alt="DAML training session"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </FadeInOnScroll>
           </div>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5 justify-center max-w-[1100px] mx-auto">
-            {educationTracks.map((track, idx) => (
-              <Card
-                key={track.title}
-                className="relative p-7 px-7 pb-[18px] rounded-2xl bg-gradient-to-br from-blue-600/4 to-rose-500/4 border border-blue-600/14 shadow-[0_12px_28px_rgba(15,23,42,0.06)] transition-all duration-[280ms] ease-in-out hover:-translate-y-2 hover:shadow-[0_32px_70px_rgba(15,23,42,0.18)] hover:border-rose-500/55"
-              >
-                <CardHeader>
-                  <CardTitle className="text-[17px] font-bold text-slate-900 mb-2 leading-[1.2]">
-                    {track.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-[1.45] text-slate-600 m-0">
-                    {track.description}
-                  </p>
-                </CardContent>
-              </Card>
+        </div>
+      </section>
+
+      {/* Client Projects */}
+      <section className="section-lg bg-white">
+        <div className="container-wide mx-auto flex flex-col gap-10">
+          <FadeInOnScroll>
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-16 items-start">
+              {/* Left: header */}
+              <div>
+                <p className="kicker mb-3">Client Projects</p>
+                <h2 className="section-heading">Pairing Duke&apos;s talent with real experience</h2>
+                <p className="hero-sub mt-4">
+                  We match dedicated engineering teams with partner organizations to deliver ML prototypes throughout the semester, with dedicated PMs and leads.
+                </p>
+              </div>
+              {/* Right: cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-stretch">
+                {clientValueProps.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.title} className="card-elevated bg-white rounded-2xl p-6 flex flex-col gap-3 border border-slate-200/70 h-full">
+                      <Icon className="w-6 h-6 text-[var(--color-primary)]" />
+                      <h3 className="h3 text-slate-900 min-h-[3.5rem]">{item.title}</h3>
+                      <p className="body text-slate-600 leading-relaxed">{item.detail}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </FadeInOnScroll>
+
+          <FadeInOnScroll>
+            <div className="flex justify-center">
+              <Button variant="cta-outline" asChild>
+                <a href="/partnerWithUs">Partner with us</a>
+              </Button>
+            </div>
+          </FadeInOnScroll>
+        </div>
+      </section>
+
+      {/* What We Do — side by side grid */}
+      <section className="bg-surface-base pt-20 pb-[100px] px-[6vw] relative z-[2]">
+        <div className="container-content mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            {whatWeDoItems.map((item, index) => (
+              <FadeInOnScroll key={item.id} delay={index * 80}>
+                <div className="flex flex-col gap-5">
+                  <div className="space-y-3">
+                    <span className="kicker">{item.label}</span>
+                    <h2 className="section-heading">{item.title}</h2>
+                    <p className="hero-sub">{item.description}</p>
+                  </div>
+                  <div className="relative h-52 md:h-64 overflow-hidden rounded-2xl border border-slate-200/70">
+                    {item.id === "internal-projects" ? (
+                      <Image
+                        src="/daml_team_photo.jpg"
+                        alt="DAML team"
+                        fill
+                        className="object-cover object-center"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    ) : item.id === "social-preprofessional" ? (
+                      <Image
+                        src="/social_photo.jpeg"
+                        alt="DAML social event"
+                        fill
+                        className="object-cover object-center"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    ) : null}
+                  </div>
+                </div>
+              </FadeInOnScroll>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Client Partnerships */}
-      <section className="py-[110px] px-[6vw] bg-gradient-to-br from-[#040b1f] via-[#0b1f3d] to-[#123263] text-slate-50">
-        <div className="max-w-[1400px] mx-auto grid gap-12">
-          {/* Heading */}
-          <div className="flex flex-col gap-[18px] max-w-[680px]">
-            <span className="text-xs tracking-[4px] font-semibold uppercase text-blue-300/75">
-              Client Projects
-            </span>
-            <h2 className="text-[44px] font-bold leading-[1.1] m-0">
-              Pairing Duke's CS Talent with real-world experience
-            </h2>
-          </div>
+      {/* Featured Projects (hidden until ready) */}
+      {/* <section className="bg-white section-lg">
+        ...
+      </section> */}
 
-          <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(320px,1fr))]">
-            {clientValueProps.map((item) => (
-              <Card
-                key={item.title}
-                className="relative p-7 px-[26px] rounded-[22px] bg-gradient-to-br from-blue-300/16 to-blue-500/8 border border-slate-400/35 shadow-[0_18px_50px_rgba(15,23,42,0.35)] transition-all duration-[280ms] ease-in-out hover:-translate-y-2 hover:shadow-[0_32px_70px_rgba(3,14,35,0.45)] hover:border-white/50"
-              >
-                <CardHeader>
-                  <CardTitle className="text-base font-semibold tracking-[3px] text-white uppercase mb-2.5">
-                    {item.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-base leading-[1.7] text-slate-100/82">
-                    {item.detail}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Program Projects Section */}
-      <section className="py-[110px] px-[6vw] pb-[120px] bg-gradient-to-b from-[#f8fafc] to-white">
-        <div className="max-w-[1400px] mx-auto grid gap-12">
-          <div className="flex flex-col gap-4 max-w-[800px]">
-            <span className="text-xs tracking-[4px] font-semibold uppercase text-rose-500">
-              Program Projects
-            </span>
-            <h2 className="text-[38px] font-bold text-slate-900 leading-[1.2]">
-              Members work on projects that test their data science and ML skills.
-            </h2>
-            <p className="text-lg leading-[1.7] text-slate-600">
-              Explore a snapshot of our member's projects from recent semesters.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-12 grid-rows-[minmax(160px,auto)] gap-5">
-            {programProjects.map((project, idx) => {
-              const isInProgress = project.status
-                .toLowerCase()
-                .includes("in progress");
-              const accent = isInProgress ? "#2563eb" : "#fb7185";
-              const accentSoft = isInProgress
-                ? "rgba(37, 99, 235, 0.12)"
-                : "rgba(251, 113, 133, 0.12)";
-              const accentBorder = isInProgress
-                ? "rgba(37, 99, 235, 0.28)"
-                : "rgba(251, 113, 133, 0.28)";
-              const accentShadow = isInProgress
-                ? "rgba(37, 99, 235, 0.18)"
-                : "rgba(251, 113, 133, 0.2)";
-              const cardBackground = `linear-gradient(150deg, rgba(255,255,255,0.98), ${accentSoft})`;
-              const hoverBackground = `linear-gradient(150deg, rgba(255,255,255,1), ${accentSoft})`;
-              const baseShadow = "0 22px 60px rgba(15, 23, 42, 0.12)";
-              const hoverShadow = `0 32px 70px ${accentShadow}`;
-              const layoutClasses = [
-                { gridColumn: "span 6", gridRow: "span 2" },
-                { gridColumn: "span 3", gridRow: "span 2" },
-                { gridColumn: "span 3", gridRow: "span 2" },
-                { gridColumn: "span 5", gridRow: "span 2" },
-                { gridColumn: "span 4", gridRow: "span 2" },
-                { gridColumn: "span 3", gridRow: "span 2" },
-              ];
-              const layout = layoutClasses[idx % layoutClasses.length];
-              const statusLabel = project.status;
-              const statusDetail = project.term;
-              return (
-                <Card
-                  key={project.title}
-                  className="relative p-7 px-[26px] rounded-3xl transition-all duration-300 ease-in-out hover:-translate-y-1.5"
-                  style={{
-                    background: cardBackground,
-                    borderColor: accentBorder,
-                    boxShadow: baseShadow,
-                    gridColumn: layout.gridColumn,
-                    gridRow: layout.gridRow,
-                  }}
-                  onMouseEnter={(event) => {
-                    const el = event.currentTarget;
-                    el.style.boxShadow = hoverShadow;
-                    el.style.borderColor = accent;
-                    el.style.background = hoverBackground;
-                  }}
-                  onMouseLeave={(event) => {
-                    const el = event.currentTarget;
-                    el.style.boxShadow = baseShadow;
-                    el.style.borderColor = accentBorder;
-                    el.style.background = cardBackground;
-                  }}
-                >
-                  <CardHeader>
-                    <Badge className="inline-flex items-center px-3 py-1.5 rounded-full mb-3.5 uppercase text-xs font-semibold tracking-[0.6px]" style={{ background: accentSoft, color: accent }}>
-                      {statusLabel}
-                    </Badge>
-                    <CardTitle className="text-xl font-semibold text-slate-900 leading-[1.5] mb-2.5">
-                      {project.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    {statusDetail && (
-                      <p className="text-[13px] text-slate-500 uppercase tracking-[1px] mb-3.5">
-                        {statusDetail}
-                      </p>
-                    )}
-                    <p className="text-base text-slate-600 leading-[1.6] mb-3.5">
-                      {project.contributors}
-                    </p>
-                    {project.description && (
-                      <p className="text-[15px] text-slate-600/90 leading-[1.65] mb-4.5">
-                        {project.description}
-                      </p>
-                    )}
-                    {project.link && (
-                      <Button
-                        asChild
-                        variant="outline"
-                        className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full font-semibold text-sm"
-                        style={{ background: accentSoft, color: accent, borderColor: accentBorder }}
-                      >
-                        <a href={project.link} target="_blank" rel="noopener noreferrer">
-                          View repo {"->"}
-                        </a>
-                      </Button>
-                    )}
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-          <div className="flex items-center gap-3 text-blue-900 text-[15px] font-medium max-w-[800px] ml-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shadow-[0_0_16px_rgba(37,99,235,0.5)]" />
-            We ensure we train a variety of models to choose the best one.
-          </div>
-        </div>
-      </section>
-
-      {/* Join Our Team Section */}
-      <section id="join-daml">
-  <CallToAction
-    title="Build alongside Duke's most curious engineers"
-    description="Join a community that ships ML projects, runs member-led labs, and mentors across research and production. We welcome members at all experience levels — start small, learn quickly, and lead real work."
-    primaryButton={{
-      text: "Join our mailing list",
-      onClick: () => {
-        if (typeof window !== "undefined") {
-          window.open(
-            "https://docs.google.com/forms/d/e/1FAIpQLSfHy0G3zA2e1HIsOjGbkS08euM6FV3hWEwvxW7vGG_hPRf79g/viewform?usp=dialog"
-          );
-        }
-      },
-    }}
-    secondaryButton={{
-      text: "Meet our team",
-      href: "/students",
-    }}
-    backgroundColor="bg-gradient-to-br from-[#1a2332] via-[#2a3f5f] to-[#1e3a5f]"
-    maxWidth="1080px"
-  />
-</section>
-
+      {/* Join CTA */}
+      <div id="join-daml">
+        <CallToAction
+          title="Build alongside Duke's ML talent"
+          description="Work with DAML members on rigorous ML projects, ranging from explorations to real-world applications. Whether you're a student or a prospective partner, join a team focused on building and prototyping."
+          primaryButton={{
+            text: "Join us",
+            onClick: () => {
+              if (typeof window !== "undefined") {
+                window.open("https://docs.google.com/forms/d/e/1FAIpQLSfHy0G3zA2e1HIsOjGbkS08euM6FV3hWEwvxW7vGG_hPRf79g/viewform?usp=dialog");
+              }
+            },
+          }}
+          secondaryButton={{ text: "Meet the team", href: "/students" }}
+          maxWidth="1080px"
+        />
+      </div>
 
       <Footer />
     </div>

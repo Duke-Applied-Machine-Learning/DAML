@@ -10,6 +10,14 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        /* Design system: primary CTA — Duke Royal Blue, light text, established shadow */
+        cta: "rounded-full h-12 min-h-12 px-8 text-base font-semibold border-0 bg-[#00539B] text-[#F2F4F8] shadow-[0_6px_18px_rgba(0,83,155,0.35)] hover:bg-[#00407A] hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(0,83,155,0.45)] transition-all duration-300",
+        /* Design system: secondary CTA — outline navy, hover fill */
+        "cta-outline":
+          "rounded-full h-12 min-h-12 px-6 text-base font-semibold bg-transparent border border-[#012169] text-[#012169] hover:bg-[#012169] hover:text-[#F2F4F8] transition-[background-color,color,border-color] duration-200 ease-out",
+        /* For dark CTA bands: ghost white outline, subtle fill on hover */
+        "cta-outline-dark":
+          "rounded-full h-12 min-h-12 px-8 text-base font-semibold border-2 border-white bg-transparent text-white hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:

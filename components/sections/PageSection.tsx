@@ -42,8 +42,8 @@ export default function PageSection({
 }: PageSectionProps) {
   const backgroundStyles = {
     light: "bg-white",
-    dark: "bg-gradient-to-br from-[#040b1f] via-[#0b1f3d] to-[#123263] text-slate-50",
-    gradient: "bg-gradient-to-br from-[rgba(8,18,49,1)] via-[rgba(30,41,59,0.95)] to-[rgba(37,99,235,0.9)] text-slate-50",
+    dark: "on-dark bg-gradient-to-br from-[#040b1f] via-[#0b1f3d] to-[#123263]",
+    gradient: "on-dark bg-gradient-to-br from-[rgba(8,18,49,1)] via-[rgba(30,41,59,0.95)] to-[rgba(37,99,235,0.9)]",
   };
 
   // New spacing rules: Hero sections get 160px top / 120px bottom, Standard get 120px top / 80px bottom

@@ -4,35 +4,102 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* ── Duke Brand Color System ── */
+  --color-navy: #012169;         /* Duke Navy — hero, footer, CTA anchors */
+  --color-primary: #00539B;      /* Duke Royal Blue — links, buttons */
+  --color-royal: #00539B;        /* alias */
+  --color-primary-hover: #00407A;
+  --color-text-on-dark: #F2F4F8;
 
-  /* Site-wide hero tokens */
-  --site-hero-padding: 120px 6vw 90px;
-  --site-hero-background: linear-gradient(
+  /* Duke Extended Palette */
+  --color-copper: #C84E00;       /* Duke Copper — accent, card hover glow */
+  --color-accent-copper: #C84E00;
+  --color-persimmon: #E89923;
+  --color-dandelion: #FFD960;
+  --color-piedmont: #A1B70D;
+  --color-eno: #339898;          /* Duke Eno teal */
+  --color-accent-teal: #339898;
+  --color-magnolia: #1D6363;
+  --color-prussian: #005587;
+  --color-shale-blue: #0577B1;
+  --color-ironweed: #993399;
+
+  /* Duke Light Surfaces */
+  --color-hatteras: #E2E6ED;     /* subtle blue-gray */
+  --color-whisper-gray: #F3F2F1; /* lightest bg */
+  --color-ginger-beer: #FCF7E5;  /* warm light bg */
+  --color-shackleford: #DAD0C6;
+  --color-limestone: #E5E5E5;
+
+  /* Duke Text / Dark Neutrals */
+  --color-cast-iron: #262626;
+  --color-graphite: #666666;
+  --color-granite: #B5B5B5;
+
+  /* Legacy aliases (backed by Duke colors; to be phased out) */
+  --brand-navy: var(--color-navy);
+  --brand-navy-dark: #00163d;
+  --brand-cream: var(--color-text-on-dark);
+  --brand-navy-gradient: linear-gradient(
     135deg,
-    rgba(9, 21, 53, 0.95),
-    rgba(26, 53, 118, 0.88),
-    rgba(59, 130, 246, 0.7)
+    var(--brand-navy-dark) 0%,
+    var(--brand-navy) 55%,
+    #111827 100%
   );
-  --site-hero-font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
-  --site-hero-heading-size: 58px;
-  --site-hero-heading-weight: 700;
-  --site-hero-heading-line-height: 1.05;
-  --site-hero-subheading-size: 20px;
-  --site-hero-subheading-line-height: 1.8;
-  --site-hero-subheading-color: rgba(226, 232, 240, 0.92);
-  --site-hero-max-width: 1080px;
-  --site-hero-text-max-width: 860px;
-  --site-hero-gap: 28px;
 
-  /* Primary CTA tokens */
-  --site-cta-font-size: 16px;
-  --site-cta-font-weight: 700;
-  --site-cta-padding: 24px 28px;
-  --site-cta-radius: 999px;
-  --site-cta-background: linear-gradient(135deg, #2563eb 0%, #38bdf8 100%);
-  --site-cta-color: #ffffff;
-  --site-cta-shadow: 0 22px 48px rgba(37, 99, 235, 0.25);
-  --site-cta-shadow-hover: 0 30px 60px rgba(37, 99, 235, 0.3);
+  /* Design system: layout — wider containers, larger desktop gutters */
+  --container-content: 1280px;
+  --container-wide: 1440px;
+  --gutter-mobile: 24px;
+  --gutter-desktop: 48px;
+  --section-padding-y-mobile: 64px;
+  --section-padding-y-desktop: 96px;
+  --section-padding-y-sm: 48px;
+  /* Larger vertical padding for “chapter break” sections */
+  --section-lg-padding-y-mobile: 80px;
+  --section-lg-padding-y-desktop: 120px;
+  /* Editorial surfaces — light-mode first, Duke palette */
+  --surface-base: var(--color-whisper-gray);   /* #F3F2F1 */
+  --surface-alt: rgba(1, 33, 105, 0.04);
+  --surface-duke: var(--color-hatteras);       /* #E2E6ED */
+  /* Extra gap between major sections (homepage hero → stats → what we do → featured → CTA) */
+  --section-gap: 0;
+  --hero-padding-top: 120px;
+  --hero-padding-bottom: 100px;
+  /* Homepage hero: bigger perceived scale (padding + min-height); extends to absorb stats; stats sit lower (below fold).
+   * Content is top-aligned so reducing --hero-home-min-height only shortens the bottom. */
+  --hero-home-min-height: 105vh;
+  --hero-home-content-offset-top: 18vh;
+  --hero-home-content-padding-y: 3rem;
+  --hero-home-padding-bottom: 6rem;
+  /* Internal page hero: consistent but smaller than homepage */
+  --hero-internal-padding-top: 100px;
+  --hero-internal-padding-bottom: 100px;
+  /* Section heading → content spacing */
+  --section-title-spacing: 2rem;
+  --section-title-spacing-md: 2.5rem;
+  /* Card elevation */
+  --card-elevated-shadow: 0 20px 40px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.04);
+  --card-elevated-shadow-hover: 0 28px 56px rgba(15, 23, 42, 0.12), 0 8px 20px rgba(15, 23, 42, 0.06);
+  --card-elevated-border: 1px solid rgba(15, 23, 42, 0.08);
+
+  /* Homepage hero — dark Duke navy gradient (intentional anchor) */
+  --hero-gradient:
+    radial-gradient(circle at 25% 20%, #0d4f7a 0%, transparent 60%),
+    radial-gradient(circle at 75% 85%, rgba(8, 20, 55, 0.6) 0%, transparent 65%),
+    linear-gradient(160deg, #060c1a, #0a1830);
+
+  /* Internal page hero — dark navy gradient (same family as homepage) */
+  --hero-background: var(--hero-gradient);
+  --hero-subheading-color: var(--color-graphite);
+
+  /* Design system: primary CTA — Duke primary blue (consulting-grade) */
+  --cta-primary-bg: var(--color-primary);
+  --cta-primary-bg-hover: var(--color-primary-hover);
+  --color-primary-soft: rgba(0, 83, 155, 0.25);
+  --cta-primary-shadow: 0 6px 18px var(--color-primary-soft);
+  --cta-primary-shadow-hover: 0 10px 24px rgba(0, 83, 155, 0.32);
+  --cta-height: 48px;
 
   /* Card tokens */
   --card-bullet-indent: 32px;
@@ -108,28 +175,6 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  
-  /* Site-specific hero tokens mapped to Tailwind */
-  --spacing-hero-padding-y: 120px;
-  --spacing-hero-padding-x: 6vw;
-  --spacing-hero-padding-bottom: 90px;
-  --spacing-hero-gap: 28px;
-  --spacing-hero-max-width: 1080px;
-  --spacing-hero-text-max-width: 860px;
-  
-  /* Typography */
-  --font-size-hero-heading: 58px;
-  --font-weight-hero-heading: 700;
-  --line-height-hero-heading: 1.05;
-  --font-size-hero-subheading: 20px;
-  --line-height-hero-subheading: 1.8;
-  
-  /* CTA tokens */
-  --font-size-cta: 16px;
-  --font-weight-cta: 700;
-  --spacing-cta-padding-y: 14px;
-  --spacing-cta-padding-x: 28px;
-  --radius-cta: 999px;
 }
 
 .dark {
@@ -167,90 +212,763 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+    color: var(--color-cast-iron);
+    font-size: 16px;
+  }
+  a {
+    color: var(--color-royal);
+    text-decoration-color: transparent;
+    transition: color 180ms ease-out, text-decoration-color 180ms ease-out;
+  }
+  a:hover {
+    color: var(--color-primary-hover);
+    text-decoration-color: currentColor;
+  }
+  button, [role="button"] {
+    transition:
+      background 200ms ease-out,
+      color 200ms ease-out,
+      box-shadow 200ms ease-out,
+      transform 200ms ease-out,
+      border-color 200ms ease-out,
+      opacity 200ms ease-out;
   }
 }
 
 @layer utilities {
-  /* Hero section utilities */
+  /* ─── Design system: containers ─────────────────────────────────────────
+   * .container-content: default content width (1280px), centered, gutters (24px mobile, 48px desktop).
+   * .container-wide: for timelines, large grids (1440px). Full-bleed sections use these inside.
+   */
+  .container-content {
+    width: 100%;
+    max-width: var(--container-content);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--gutter-mobile);
+    padding-right: var(--gutter-mobile);
+  }
+  @media (min-width: 768px) {
+    .container-content {
+      padding-left: var(--gutter-desktop);
+      padding-right: var(--gutter-desktop);
+    }
+  }
+
+  .container-wide {
+    width: 100%;
+    max-width: var(--container-wide);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--gutter-mobile);
+    padding-right: var(--gutter-mobile);
+  }
+  @media (min-width: 768px) {
+    .container-wide {
+      padding-left: var(--gutter-desktop);
+      padding-right: var(--gutter-desktop);
+    }
+  }
+
+  /* ─── Design system: section spacing ────────────────────────────────────
+   * .section: standard vertical padding (64px mobile, 96px desktop) + horizontal gutters.
+   * .section-sm: smaller vertical padding (48px).
+   * .section-y: vertical padding only (when inner container handles horizontal).
+   */
+  .section {
+    padding-top: var(--section-padding-y-mobile);
+    padding-bottom: var(--section-padding-y-mobile);
+    padding-left: var(--gutter-mobile);
+    padding-right: var(--gutter-mobile);
+  }
+  @media (min-width: 768px) {
+    .section {
+      padding-top: var(--section-padding-y-desktop);
+      padding-bottom: var(--section-padding-y-desktop);
+      padding-left: var(--gutter-desktop);
+      padding-right: var(--gutter-desktop);
+    }
+  }
+
+  .section-sm {
+    padding-top: var(--section-padding-y-sm);
+    padding-bottom: var(--section-padding-y-sm);
+    padding-left: var(--gutter-mobile);
+    padding-right: var(--gutter-mobile);
+  }
+  @media (min-width: 768px) {
+    .section-sm {
+      padding-left: var(--gutter-desktop);
+      padding-right: var(--gutter-desktop);
+    }
+  }
+
+  .section-y {
+    padding-top: var(--section-padding-y-mobile);
+    padding-bottom: var(--section-padding-y-mobile);
+  }
+  @media (min-width: 768px) {
+    .section-y {
+      padding-top: var(--section-padding-y-desktop);
+      padding-bottom: var(--section-padding-y-desktop);
+    }
+  }
+
+  .section-y-lg {
+    padding-top: var(--section-lg-padding-y-mobile);
+    padding-bottom: var(--section-lg-padding-y-mobile);
+  }
+  @media (min-width: 768px) {
+    .section-y-lg {
+      padding-top: var(--section-lg-padding-y-desktop);
+      padding-bottom: var(--section-lg-padding-y-desktop);
+    }
+  }
+
+  /*
+   * .section-lg: stronger “chapter break” spacing between major sections.
+   * Use between hero→stats, stats→what we do, what we do→featured, featured→CTA.
+   */
+  .section-lg {
+    padding-top: var(--section-lg-padding-y-mobile);
+    padding-bottom: var(--section-lg-padding-y-mobile);
+    padding-left: var(--gutter-mobile);
+    padding-right: var(--gutter-mobile);
+  }
+  @media (min-width: 768px) {
+    .section-lg {
+      padding-top: var(--section-lg-padding-y-desktop);
+      padding-bottom: var(--section-lg-padding-y-desktop);
+      padding-left: var(--gutter-desktop);
+      padding-right: var(--gutter-desktop);
+    }
+  }
+
+  /* Space between section heading and first content block */
+  .section-title-spacing {
+    margin-bottom: var(--section-title-spacing);
+  }
+  @media (min-width: 768px) {
+    .section-title-spacing {
+      margin-bottom: var(--section-title-spacing-md);
+    }
+  }
+
+  /* Duke navy: footer, CTA band, key section breaks */
+  .bg-brand-navy {
+    background-color: var(--brand-navy);
+  }
+  footer.footer-static {
+    background-color: unset;
+    background-image: linear-gradient(160deg, var(--color-navy), #001a4a);
+    background-attachment: scroll;
+  }
+  section.cta-mesh.bg-brand-navy {
+    background-color: unset;
+    background-image: linear-gradient(160deg, #0d5278, #0d4f7a);
+  }
+  .bg-brand-navy-gradient {
+    background: var(--brand-navy-gradient);
+  }
+  .bg-brand-navy-subtle {
+    background-color: #0121690a;
+  }
+
+  /* Editorial surfaces: subtle alternation between base and alt */
+  .bg-surface-base {
+    background-color: var(--surface-base);
+  }
+  .bg-surface-alt {
+    background-color: var(--surface-alt);
+  }
+  .bg-surface-duke {
+    background-color: var(--surface-duke);
+  }
+
+  /* Featured Projects: container for the project cards grid (no card background) */
+  .projects-frame {
+    padding: 2rem 0;
+  }
+
+  /* Mission page: soft angled edge for statement + image split (~6–8°) */
+  .mission-image-angled {
+    clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* Mission statement column: Duke navy, white text */
+  .mission-statement-bg {
+    background: linear-gradient(135deg, var(--color-navy) 0%, #001a4a 100%);
+    color: var(--color-text-on-dark);
+  }
+  .mission-statement-bg .section-heading,
+  .mission-statement-bg .hero-sub,
+  .mission-statement-bg .h2,
+  .mission-statement-bg .body {
+    color: inherit;
+  }
+
+  /* Mission statement section: light surface bg */
+  .mission-statement-section-bg {
+    background: var(--surface-base);
+  }
+
+  /* Mission statement section: image flush right, no right padding on desktop */
+  .mission-statement-section {
+    overflow-x: hidden;
+  }
+  @media (min-width: 1024px) {
+    .mission-statement-section {
+      padding-right: 0;
+    }
+  }
+
+  /* Tighter vertical spacing above CTA when used after a long section */
+  .section-tighter-before-cta {
+    margin-top: calc(-1 * var(--section-padding-y-sm));
+  }
+
+  /* Reusable mesh background – warped wireframe grid (DAML slide deck style).
+   * Intersecting curved lines form a distorted surface; Duke copper, subtle.
+   * Stacking: hero gradient → mesh overlay (z-0) → hero content (z-10). */
+  .mesh-bg {
+    position: relative;
+  }
+  .mesh-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.82;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C84E00' stroke-width='1.2' opacity='1'%3E%3Cpath d='M0 0 Q80 200 0 400 Q-60 600 0 800'/%3E%3Cpath d='M100 0 Q220 180 100 400 Q40 620 100 800'/%3E%3Cpath d='M200 0 Q280 220 200 400 Q120 580 200 800'/%3E%3Cpath d='M300 0 Q380 160 300 400 Q220 640 300 800'/%3E%3Cpath d='M400 0 Q520 200 400 400 Q320 600 400 800'/%3E%3Cpath d='M500 0 Q580 240 500 400 Q420 560 500 800'/%3E%3Cpath d='M600 0 Q680 180 600 400 Q520 620 600 800'/%3E%3Cpath d='M700 0 Q820 220 700 400 Q620 580 700 800'/%3E%3Cpath d='M800 0 Q880 200 800 400 Q720 600 800 800'/%3E%3Cpath d='M900 0 Q980 240 900 400 Q820 560 900 800'/%3E%3Cpath d='M1000 0 Q1080 160 1000 400 Q920 640 1000 800'/%3E%3Cpath d='M1100 0 Q1180 200 1100 400 Q1020 600 1100 800'/%3E%3Cpath d='M1200 0 Q1280 180 1200 400 Q1120 620 1200 800'/%3E%3Cpath d='M0 0 Q600 80 1200 0'/%3E%3Cpath d='M0 100 Q600 220 1200 100'/%3E%3Cpath d='M0 200 Q600 120 1200 200'/%3E%3Cpath d='M0 300 Q600 380 1200 300'/%3E%3Cpath d='M0 400 Q600 320 1200 400'/%3E%3Cpath d='M0 500 Q600 420 1200 500'/%3E%3Cpath d='M0 600 Q600 520 1200 600'/%3E%3Cpath d='M0 700 Q600 620 1200 700'/%3E%3Cpath d='M0 800 Q600 720 1200 800'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  /* Hero-specific copper mesh (legacy; hero now uses .mesh-bg) */
+  .hero-copper-mesh {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        circle at 20% 30%,
+        rgba(200, 78, 0, 0.06),
+        transparent 60%
+      ),
+      radial-gradient(
+        circle at 80% 70%,
+        rgba(200, 78, 0, 0.04),
+        transparent 65%
+      );
+  }
+  .cta-mesh {
+    position: relative;
+  }
+
+  /* ─── Global motion system ─────────────────────────────────────────────── */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 450ms cubic-bezier(0.22, 1, 0.36, 1) 50ms both;
+  }
+
+  /* Staggered groups driven via [data-stagger].in-view (+50ms global delay) */
+  [data-stagger] > * {
+    opacity: 0;
+  }
+  [data-stagger].in-view > * {
+    animation: fadeUp 450ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  [data-stagger].in-view > *:nth-child(1) { animation-delay: 50ms; }
+  [data-stagger].in-view > *:nth-child(2) { animation-delay: 130ms; }
+  [data-stagger].in-view > *:nth-child(3) { animation-delay: 210ms; }
+  [data-stagger].in-view > *:nth-child(4) { animation-delay: 290ms; }
+
+  /* Semantic accent utilities (Duke primary) */
+  .text-accent {
+    color: var(--color-primary);
+  }
+  .bg-accent {
+    background-color: var(--color-primary);
+  }
+  .border-accent {
+    border-color: var(--color-primary);
+  }
+  .text-accent-foreground {
+    color: var(--color-text-on-dark);
+  }
+
+  /* Hero wrapper: contains Navbar + hero on homepage; owns gradient + static overlay.
+   * Stacking: wrapper bg → ::before (z-0) → main (z-1) so page content is never covered. */
+   .hero-wrapper {
+    position: relative;
+    background: var(--hero-gradient);
+  }
+  .hero-wrapper > main {
+    position: relative;
+    z-index: 1;
+  }
+  .hero-wrapper .hero-home {
+    position: relative;
+    z-index: 2;
+    margin-top: -80px;
+    padding-top: calc(80px + var(--hero-home-content-padding-y));
+    background: transparent;
+  }
+
+  .mouse-glow-wrapper {
+    margin-top: -100px;
+    padding-top: 100px;
+    min-height: calc(var(--hero-home-min-height) + 100px);
+  }
+
+  .hero-content {
+    max-width: 800px;
+  }
+
+  /* ─── Design system: hero ───────────────────────────────────────────────
+   * .hero: internal pages (Mission, Projects). Smaller than homepage.
+   * .hero-home: homepage only — wrapper for min-height + content padding (keep big/bold).
+   * .hero-internal: optional class for internal hero section (padding only).
+   */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-top: var(--hero-padding-top);
+    padding-bottom: var(--hero-padding-bottom);
+    padding-left: var(--gutter-mobile);
+    padding-right: var(--gutter-mobile);
+    background: none;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(5, 119, 177, 0.25),
+        transparent 40%
+      );
+  }
+  @media (min-width: 768px) {
+    .hero {
+      padding-left: var(--gutter-desktop);
+      padding-right: var(--gutter-desktop);
+    }
+  }
+
+  .hero-internal {
+    padding-top: var(--hero-internal-padding-top);
+    padding-bottom: var(--hero-internal-padding-bottom);
+    padding-left: var(--gutter-mobile);
+    padding-right: var(--gutter-mobile);
+    background: var(--hero-background);
+  }
+  @media (min-width: 768px) {
+    .hero-internal {
+      padding-left: var(--gutter-desktop);
+      padding-right: var(--gutter-desktop);
+    }
+  }
+
+  /* Homepage hero: transparent so .hero-wrapper gradient shows through */
+  .hero-home {
+    position: relative;
+    min-height: var(--hero-home-min-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: var(--hero-home-content-padding-y);
+    padding-bottom: var(--hero-home-padding-bottom);
+    background: transparent;
+  }
+  .hero-home-inner {
+    justify-content: flex-start;
+    padding-top: var(--hero-home-content-offset-top);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-wrapper .hero-home-inner {
+    padding-top: calc(var(--hero-home-content-offset-top) + 80px);
+  }
+
+  /* Stats credibility band: horizontal data highlight, no card UI */
+  .stats-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: center;
+    padding: 0.5rem 0;
+    align-items: center;
+    justify-content: center;
+  }
+  .stats-value {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    line-height: 1.1;
+  }
+  .stats-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: rgb(71, 85, 105);
+    opacity: 0.85;
+  }
+
+  /* Hero stats: always on dark hero background */
+  .mouse-glow-wrapper .hero-stats .stats-value,
+  .mouse-glow-wrapper .hero-stats .stats-label {
+    color: var(--color-text-on-dark);
+    opacity: 1;
+  }
+
+
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    height: 1px;
+    width: 0;
+    background: currentColor;
+    transition: width 200ms ease-out;
+  }
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Card elevation: consistent shadow/border + hover lift, copper outline & glow behind */
+  .card-elevated {
+    position: relative;
+    box-shadow: var(--card-elevated-shadow);
+    border: var(--card-elevated-border);
+    border-radius: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .card-elevated:hover {
+    transform: translateY(-4px);
+    border-color: rgba(200, 78, 0, 0.55);
+    box-shadow:
+      0 24px 56px rgba(200, 78, 0, 0.2),
+      0 28px 60px rgba(15, 23, 42, 0.12),
+      0 0 0 1px rgba(1, 33, 105, 0.08);
+  }
+  /* Feature/portfolio cards: same outline + glow behind */
+  .card-elevated-feature:hover {
+    transform: translateY(-4px);
+    border-color: rgba(200, 78, 0, 0.55);
+    box-shadow:
+      0 24px 56px rgba(200, 78, 0, 0.2),
+      0 28px 60px rgba(15, 23, 42, 0.12),
+      0 0 0 1px rgba(1, 33, 105, 0.08);
+  }
+
+  /* ─── Design system: typography (Geist Sans only) ────────────────────────
+   * .h1: hero title — clamp(42px, 5vw, 72px), line-height 1.1, font-weight 700.
+   * .h2: section title — clamp(28px, 3vw, 44px), line-height 1.2, font-weight 600.
+   * .h3: card/subsection — 20–24px, font-weight 600.
+   * .body: 16px, line-height 1.6–1.7.
+   * .body-lg: intro/hero copy — 18px.
+   * .meta: small labels — 13–14px, font-weight 500; use for uppercase labels (12–13px).
+   */
+  .h1,
+  .heading-1 {
+    font-size: clamp(48px, 6vw, 84px);
+    line-height: 1.08;
+    font-weight: 700;
+    color: rgb(15 23 42);
+  }
+
+  .h2,
+  .heading-2 {
+    font-size: clamp(34px, 3.8vw, 54px);
+    line-height: 1.12;
+    font-weight: 650;
+    color: rgb(15 23 42);
+  }
+
+  .h3 {
+    font-size: clamp(22px, 2.2vw, 28px);
+    font-weight: 600;
+    color: rgb(15 23 42);
+  }
+
+  .body {
+    font-size: 17px;
+    line-height: 1.65;
+    color: rgb(51 65 85);
+  }
+
+
+  .prose {
+    font-size: 17px;
+    line-height: 1.65;
+    color: rgb(51 65 85);
+  }
+  .prose p {
+    margin-bottom: 0.75em;
+  }
+  .prose p:last-child {
+    margin-bottom: 0;
+  }
+
+  .meta {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(71 85 105);
+  }
+
+  .kicker {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--color-copper);
+  }
+  @media (min-width: 768px) {
+    .kicker {
+      font-size: 0.9375rem;
+    }
+  }
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .kicker {
+    color: rgba(255 255 255 / 0.7);
+  }
+
+  /* Hero subheading: graphite on light bg, white in dark sections */
+  .hero-sub {
+    font-size: 20px;
+    line-height: 1.7;
+    color: var(--color-graphite);
+  }
+
+  /* Section titles: dark, declarative */
+  .section-heading {
+    font-size: clamp(32px, 3.5vw, 50px);
+    line-height: 1.15;
+    font-weight: 600;
+    color: rgb(15 23 42);
+  }
+
+  /* Backward compat: partnerWithUs and any page still using old hero class names */
   .hero-section {
-    padding: var(--site-hero-padding);
-    background: var(--site-hero-background);
-    font-family: var(--site-hero-font-family);
+    padding-top: var(--hero-internal-padding-top);
+    padding-bottom: var(--hero-internal-padding-bottom);
+    padding-left: var(--gutter-mobile);
+    padding-right: var(--gutter-mobile);
+    background: var(--hero-background);
   }
-  
+  @media (min-width: 768px) {
+    .hero-section {
+      padding-left: var(--gutter-desktop);
+      padding-right: var(--gutter-desktop);
+    }
+  }
   .hero-heading {
-    font-size: var(--site-hero-heading-size);
-    font-weight: var(--site-hero-heading-weight);
-    line-height: var(--site-hero-heading-line-height);
+    font-size: clamp(48px, 6vw, 84px);
+    line-height: 1.08;
+    font-weight: 700;
   }
-  
   .hero-subheading {
-    font-size: var(--site-hero-subheading-size);
-    line-height: var(--site-hero-subheading-line-height);
-    color: var(--site-hero-subheading-color);
-    max-width: var(--site-hero-text-max-width);
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--hero-subheading-color);
   }
-  
-  /* CTA button utilities */
+
+  /* ─── On-dark sections: light text by default ───────────────────────────
+   * Apply .on-dark to any section with a dark background (hero, CTA band, footer).
+   * Ensures .h1, .h2, .body, etc. render light; .meta uses muted-on-dark.
+   * Hero classes (.hero-internal, .hero-section, .hero-home) get these rules automatically.
+   */
+  /* Dark-background sections: all heroes + explicit .on-dark */
+  .on-dark,
+  .hero-home,
+  .hero-internal,
+  .hero-section {
+    color: var(--color-text-on-dark);
+  }
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .h1,
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .h2,
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .h3,
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .heading-1,
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .heading-2,
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .body,
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .hero-sub,
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .section-heading,
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .hero-heading,
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .hero-subheading {
+    color: inherit;
+  }
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .meta {
+    color: rgba(255 255 255 / 0.75);
+  }
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .prose {
+    color: inherit;
+  }
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) .prose p {
+    color: inherit;
+  }
+  :where(.on-dark, .hero-home, .hero-internal, .hero-section) a {
+    color: inherit;
+  }
+
+  /* ─── Design system: buttons (crimson primary, outlined navy secondary) ──── */
+  .btn-cta-gradient {
+    background: var(--cta-primary-bg);
+    color: #f0efe5;
+    border: none;
+    box-shadow: var(--cta-primary-shadow);
+    transition: background 200ms ease-out, box-shadow 200ms ease-out;
+  }
+  .btn-cta-gradient:hover {
+    background: var(--cta-primary-bg-hover);
+    box-shadow: var(--cta-primary-shadow-hover);
+  }
+  .btn-primary {
+    height: var(--cta-height);
+    min-height: var(--cta-height);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-radius: 9999px;
+    font-size: 16px;
+    font-weight: 600;
+    background: var(--cta-primary-bg);
+    color: #f0efe5;
+    border: none;
+    box-shadow: var(--cta-primary-shadow);
+    transition: background 200ms ease-out, box-shadow 200ms ease-out;
+  }
+  .btn-primary:hover {
+    background: var(--cta-primary-bg-hover);
+    box-shadow: var(--cta-primary-shadow-hover);
+  }
+
+  .btn-secondary {
+    height: var(--cta-height);
+    min-height: var(--cta-height);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-radius: 9999px;
+    font-size: 16px;
+    font-weight: 600;
+    background: transparent;
+    border: 1.5px solid var(--color-navy);
+    color: var(--color-navy);
+    transition: background 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out;
+  }
+  .btn-secondary:hover {
+    background: var(--color-navy);
+    color: var(--color-text-on-dark);
+  }
+
+  /* Legacy: section-spacing → use .section instead */
+  .section-spacing {
+    padding-top: var(--section-padding-y-mobile);
+    padding-bottom: var(--section-padding-y-mobile);
+    padding-left: var(--gutter-mobile);
+    padding-right: var(--gutter-mobile);
+  }
+  @media (min-width: 768px) {
+    .section-spacing {
+      padding-top: var(--section-padding-y-desktop);
+      padding-bottom: var(--section-padding-y-desktop);
+      padding-left: var(--gutter-desktop);
+      padding-right: var(--gutter-desktop);
+    }
+  }
+
+  .section-spacing-y {
+    padding-top: var(--section-padding-y-mobile);
+    padding-bottom: var(--section-padding-y-mobile);
+  }
+  @media (min-width: 768px) {
+    .section-spacing-y {
+      padding-top: var(--section-padding-y-desktop);
+      padding-bottom: var(--section-padding-y-desktop);
+    }
+  }
+
+  /* Legacy CTA class (aligns with .btn-primary) */
   .cta-button {
-    background: var(--site-cta-background);
-    color: var(--site-cta-color);
-    border-radius: var(--site-cta-radius);
-    font-size: var(--site-cta-font-size);
-    font-weight: var(--site-cta-font-weight);
-    box-shadow: var(--site-cta-shadow);
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    height: var(--cta-height);
+    min-height: var(--cta-height);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-radius: 9999px;
+    font-size: 16px;
+    font-weight: 600;
+    background: var(--cta-primary-bg);
+    color: #f0efe5;
+    border: none;
+    box-shadow: var(--cta-primary-shadow);
+    transition: background 200ms ease-out, box-shadow 200ms ease-out;
   }
-  
   .cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--site-cta-shadow-hover);
+    background: var(--cta-primary-bg-hover);
+    box-shadow: var(--cta-primary-shadow-hover);
   }
-  
-  /* AnimatedRotator animations */
+
+  /* AnimatedRotator (homepage hero); uses Geist Sans */
   @keyframes damlSlideIn {
     0% { transform: translateX(100%); opacity: 0; }
     100% { transform: translateX(0%); opacity: 1; }
   }
-  
   @keyframes damlSlideOut {
     0% { transform: translateX(0%); opacity: 1; }
     100% { transform: translateX(-100%); opacity: 0; }
   }
-  
   .daml-rotator {
     @apply relative inline-block overflow-visible h-12 align-middle;
   }
-  
   .daml-rotator .rot-item {
     @apply absolute left-0 top-0 right-0 whitespace-nowrap font-bold pointer-events-none z-10;
     transform: translateX(100%);
     opacity: 0;
     font-size: clamp(20px, 3.2vw, 36px);
-    font-family: "Roboto", sans-serif;
-    text-shadow: 0 2px 12px rgba(2,6,23,0.55);
+    font-family: var(--font-geist-sans), sans-serif;
+    text-shadow: 0 2px 12px rgba(2, 6, 23, 0.55);
     letter-spacing: 0.15px;
   }
-  
   .daml-rotator .slide-in {
-    animation: damlSlideIn cubic-bezier(.2,.9,.2,1) forwards;
+    animation: damlSlideIn cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
   }
-  
   .daml-rotator .slide-out {
-    animation: damlSlideOut cubic-bezier(.2,.9,.2,1) forwards;
+    animation: damlSlideOut cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
   }
-  
+
   /* Partner page animations */
   @keyframes moveLine {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
   }
-  
   @keyframes scroll-left {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
