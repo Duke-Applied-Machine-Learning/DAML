@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import Footer from "@/components/layout/Footer";
 import CallToAction from "@/components/sections/CallToAction";
+import DevelopmentBanner from "@/components/ui/development-banner";
 
 interface TechIconProps {
   src: string;
