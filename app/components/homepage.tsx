@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import CallToAction from "@/components/sections/CallToAction";
@@ -440,10 +440,73 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* Featured Projects (hidden until ready) */}
-      {/* <section className="bg-white section-lg">
-        ...
-      </section> */}
+      {/* Featured Projects */}
+      <section className="bg-white section-lg">
+        <div className="container-wide mx-auto space-y-10">
+          <FadeInOnScroll>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between section-title-spacing">
+              <div className="space-y-2">
+                <p className="kicker">Portfolio</p>
+                <h2 className="section-heading">Featured projects</h2>
+              </div>
+              {/* <Button variant="cta-outline" className="self-start sm:self-auto" asChild>
+                <a href="/projects">See all projects</a>
+              </Button> */}
+            </div>
+          </FadeInOnScroll>
+
+          <div className="projects-frame relative flex items-stretch gap-5 md:gap-8">
+            <button
+              type="button"
+              aria-label="Previous projects"
+              className="hidden md:inline-flex absolute -left-6 top-1/2 -translate-y-1/2 items-center justify-center w-10 h-10 rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm hover:bg-[var(--color-hatteras)] hover:text-[var(--color-navy)] transition-colors duration-200"
+              onClick={() => handleCarouselStep("prev")}
+            >
+              <span className="text-lg leading-none">←</span>
+            </button>
+
+            <FadeInOnScroll
+              onVisibleOnce={() => {
+                if (featuredAnimationDoneRef.current) return;
+                featuredAnimationDoneRef.current = true;
+                setShouldAnimateFeaturedOnce(true);
+                window.setTimeout(() => setShouldAnimateFeaturedOnce(false), 700);
+              }}
+            >
+              <div
+                className={cn(
+                  "grid flex-1 gap-7 sm:grid-cols-2 md:grid-cols-3 md:px-16 items-stretch transition-transform duration-200 ease-out",
+                  isCarouselAnimating && carouselDirection === "next" ? "-translate-x-4"
+                  : isCarouselAnimating && carouselDirection === "prev" ? "translate-x-4"
+                  : "translate-x-0"
+                )}
+              >
+                {visibleFeaturedProjects.map((project, index) => (
+                  <div
+                    key={project.id}
+                    className={cn(
+                      shouldAnimateFeaturedOnce && "animate-fade-up",
+                      project.hasScreenshot === false ? "aspect-square self-center" : "h-full"
+                    )}
+                    style={shouldAnimateFeaturedOnce ? { animationDelay: `${50 + index * 80}ms` } : undefined}
+                  >
+                    <ProjectCard project={project} />
+                  </div>
+                ))}
+              </div>
+            </FadeInOnScroll>
+
+            <button
+              type="button"
+              aria-label="Next projects"
+              className="hidden md:inline-flex absolute -right-6 top-1/2 -translate-y-1/2 items-center justify-center w-10 h-10 rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm hover:bg-[var(--color-hatteras)] hover:text-[var(--color-navy)] transition-colors duration-200"
+              onClick={() => handleCarouselStep("next")}
+            >
+              <span className="text-lg leading-none">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
 
       {/* Join CTA */}
       <div id="join-daml">

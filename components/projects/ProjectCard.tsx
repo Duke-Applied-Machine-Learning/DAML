@@ -17,25 +17,28 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Card className="card-elevated flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white p-0 h-full transition-transform duration-200 ease-out hover:-translate-y-1">
       {showScreenshot && (
-        <div className="relative h-48 md:h-60 w-full bg-slate-100/80 flex items-center justify-center text-xs md:text-sm text-slate-500 overflow-hidden">
-          <div
-            className="absolute inset-0 z-[1] pointer-events-none"
-            style={{
-              background: "linear-gradient(to top, rgba(0,0,0,0.25), transparent)",
-            }}
-          />
-          {project.imageSrc ? (
+        project.imageSrc ? (
+          <div className="relative w-full overflow-hidden">
+            <div
+              className="absolute inset-0 z-[1] pointer-events-none"
+              style={{
+                background: "linear-gradient(to top, rgba(0,0,0,0.25), transparent)",
+              }}
+            />
             <Image
               src={project.imageSrc}
               alt={screenshotLabel}
-              fill
-              className="object-cover object-center"
+              width={0}
+              height={0}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="w-full h-auto block"
             />
-          ) : (
-            <span className="relative z-10 px-4 text-center">{screenshotLabel}</span>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="h-48 md:h-60 w-full bg-slate-100/80 flex items-center justify-center text-xs md:text-sm text-slate-500">
+            <span className="px-4 text-center">{screenshotLabel}</span>
+          </div>
+        )
       )}
 
       {/* Text content */}
@@ -47,16 +50,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
       >
         <div className="space-y-3">
           <CardTitle className="h3 text-slate-900">{project.title}</CardTitle>
-          {project.outcome && (
-            <p className="body">{project.outcome}</p>
+          {project.description && (
+            <p className="body">{project.description}</p>
           )}
         </div>
 
-        {project.stack && (
-          <p className="meta">Stack: {project.stack}</p>
-        )}
-
-        {(project.meta || project.team || project.repoUrl) && (
+        {(project.meta || project.team || project.repoUrl || project.slidesUrl) && (
           <div className="mt-2 flex items-start justify-between gap-4 meta">
             <div className="space-y-1.5">
               {project.meta && (
@@ -66,14 +65,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 <p className="mb-0">Team: {project.team}</p>
               )}
             </div>
-            {project.repoUrl && (
+            {(project.repoUrl || project.slidesUrl) && (
               <Button
                 asChild
                 variant="outline"
                 className="mt-1 h-8 md:h-9 rounded-full px-3 md:px-4 text-[11px] md:text-xs font-medium"
               >
-                <a href={project.repoUrl} target="_blank" rel="noopener noreferrer">
-                  View repo
+                <a href={project.repoUrl ?? project.slidesUrl} target="_blank" rel="noopener noreferrer">
+                  {project.repoUrl ? "View repo" : "View slides"}
                 </a>
               </Button>
             )}

@@ -1,6 +1,5 @@
 "use client";
 
-import { redirect } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
 import { projects } from "../../data/projects";
@@ -9,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import Footer from "@/components/layout/Footer";
 
 export default function ProjectsPage() {
-  redirect("/");
   const [archiveExpanded, setArchiveExpanded] = useState(false);
 
   const currentProjects = projects.filter((p) => p.status === "current");
