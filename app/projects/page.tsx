@@ -53,30 +53,30 @@ export default function ProjectsPage() {
       </section>
 
       {/* Archive */}
-      <section className="section section-lg bg-white border-t border-slate-200/70">
-        <div className="container-wide mx-auto">
-          <div className="flex flex-wrap items-center gap-4 section-title-spacing">
-            <div>
-              <p className="kicker mb-2">Past work</p>
-              <h2 className="section-heading text-slate-900 mb-0">Archive</h2>
-            </div>
-            <Button
-              variant="cta-outline"
-              className="rounded-full"
-              onClick={() => setArchiveExpanded(true)}
-            >
-              Expand all
-            </Button>
-          </div>
-        {archiveExpanded && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-            {archiveProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-        )}
-        </div>
-      </section>
+      {/* <section className="section section-lg bg-white border-t border-slate-200/70"> */}
+      {/*   <div className="container-wide mx-auto"> */}
+      {/*     <div className="flex flex-wrap items-center gap-4 section-title-spacing"> */}
+      {/*       <div> */}
+      {/*         <p className="kicker mb-2">Past work</p> */}
+      {/*         <h2 className="section-heading text-slate-900 mb-0">Archive</h2> */}
+      {/*       </div> */}
+      {/*       <Button */}
+      {/*         variant="cta-outline" */}
+      {/*         className="rounded-full" */}
+      {/*         onClick={() => setArchiveExpanded(true)} */}
+      {/*       > */}
+      {/*         Expand all */}
+      {/*       </Button> */}
+      {/*     </div> */}
+      {/*   {archiveExpanded && ( */}
+      {/*     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8"> */}
+      {/*       {archiveProjects.map((project) => ( */}
+      {/*         <ProjectCard key={project.id} project={project} /> */}
+      {/*       ))} */}
+      {/*     </div> */}
+      {/*   )} */}
+      {/*   </div> */}
+      {/* </section> */}
 
       <Footer />
     </div>
