@@ -21,18 +21,6 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: "legislator-chatbot",
-    title: "Legislator Chatbot",
-    imageSrc: "/project_images/legislator-chatbot.png",
-    screenshotAlt: "Legislator Chatbot project screenshot",
-    description: "Chatbot that leverages Retrieval Augmented Generation (RAG) to provide up-to-date information about US legislation and policy using bills, hearings, and voting polls. Integrates recent data scraped from the US Congress website to answer policy-related questions more accurately than a standard LLM.",
-    meta: "Client Project | Sp24",
-    team: "Jai Kasera",
-    repoUrl: "https://github.com/jaikasera/Legislator-Chatbot",
-    tier: "featured",
-    status: "current",
-  },
-  {
     id: "optimal-transport",
     title: "Unifying Optimal Transport Frameworks in Diffusion",
     imageSrc: "/project_images/optimal-transport.png",
@@ -142,6 +130,18 @@ export const projects: Project[] = [
     team: "Ruben Marcus, Alejandro Wigisser",
     slidesUrl: "https://docs.google.com/presentation/d/1N-BhR3XI5uN3hvoXn5d6afmRXZfmXn5UZ7Ig_PoSZ6w/edit?slide=id.g3d27788c90b_0_43#slide=id.g3d27788c90b_0_43",
     tier: "standard",
+    status: "current",
+  },
+  {
+    id: "legislator-chatbot",
+    title: "Legislator Chatbot",
+    imageSrc: "/project_images/legislator-chatbot.png",
+    screenshotAlt: "Legislator Chatbot project screenshot",
+    description: "Chatbot that leverages Retrieval Augmented Generation (RAG) to provide up-to-date information about US legislation and policy using bills, hearings, and voting polls. Integrates recent data scraped from the US Congress website to answer policy-related questions more accurately than a standard LLM.",
+    meta: "Client Project | Sp24",
+    team: "Jai Kasera",
+    repoUrl: "https://github.com/jaikasera/Legislator-Chatbot",
+    tier: "featured",
     status: "current",
   },
   {
