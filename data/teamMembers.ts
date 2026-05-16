@@ -27,6 +27,7 @@ export const teamMembers: TeamMember[] = [
   { id: "pm-5", name: "Peakay Clifford", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/PMs/Peakay_Clifford.jpg", major: "Physics, Math",     year: "2028" },
   { id: "pm-6", name: "Ruben Marcus", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/PMs/Ruben_Marcus.jpg", major: "Math",     year: "2029" },
   { id: "pm-7", name: "Taylor Allen", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/PMs/Taylor_Allen.png", major: "MS in Statistical Science", year: "2027" },
+  { id: "pm-8", name: "Emerson Cortazar", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/PMs/Emerson_Cortazar.jpg", major: "CS, Math", year: "2028"},
   { id: "pm-8", name: "Jin Yoo", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/blank.jpg", major: "Undeclared",   year: "2029" },
   { id: "pm-9", name: "Matthew Del Preto", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/blank.jpg", major: "CS, Math, Minor in Spanish",     year: "2029" },
   // Data Scientists (hidden until ready)
