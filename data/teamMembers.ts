@@ -12,13 +12,13 @@ export type TeamMember = {
 
 export const teamMembers: TeamMember[] = [
   // Executive
-  { id: "leader-1",  name: "Jai Kasera",        subsection: "Executive", projectStack: "Data Science Director",      imageUrl: "/headshots/Executive/jai.jpeg",      major: "Math, CS",              year: "2027" },
+  { id: "leader-1",  name: "Jai Kasera",        subsection: "Executive", projectStack: "Co-President",      imageUrl: "/headshots/Executive/jai.jpeg",      major: "Math, CS",              year: "2027" },
+  { id: "leader-7",  name: "Renzo Larrea",     subsection: "Executive", projectStack: "Co-President",               imageUrl: "/headshots/Executive/renzo.jpeg",    major: "Math, CS",              year: "2028" },
   { id: "leader-2",  name: "Mayur Sekhar",      subsection: "Executive", projectStack: "Data Science Director",       imageUrl: "/headshots/Executive/mayur.jpg",     major: "Math, CS, AI Conc.",    year: "2027" },
   { id: "leader-3",  name: "Rithvik Neti",      subsection: "Executive", projectStack: "Data Science Director",           imageUrl: "/headshots/Executive/rithvik.jpeg",  major: "CS, Political Science", year: "2027" },
   { id: "leader-4",  name: "David Li",          subsection: "Executive", projectStack: "Head of Project Management",imageUrl: "/headshots/Executive/david.jpeg",    major: "CS, Econ",              year: "2028" },
   { id: "leader-5",  name: "Clara Bartusiak",   subsection: "Executive", projectStack: "Director of Outreach",     imageUrl: "/headshots/Executive/clara.jpg",     major: "ECE, CS",               year: "2027" },
   { id: "leader-6", name: "Ashley Park",       subsection: "Executive", projectStack: "Director of Marketing",    imageUrl: "/headshots/Executive/ashley.jpg",    major: "CS, Stats",             year: "2028" },
-  { id: "leader-7",  name: "Renzo Larrea",     subsection: "Executive", projectStack: "President",               imageUrl: "/headshots/Executive/renzo.jpeg",    major: "Math, CS",              year: "2028" },
   // PMs
   { id: "pm-1", name: "Aashish Cheruvu", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/PMs/Aashish_Cheruvu.jpg", major: "BME, ECE",        year: "2028" },
   { id: "pm-2", name: "Cheri Ho", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/PMs/Cheri_Ho.jpg", major: "Econ, CS, Visual Media",  year: "2029" },
