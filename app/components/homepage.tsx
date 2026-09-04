@@ -237,8 +237,8 @@ const clientValueProps = [
 ];
 
 const heroStats = [
-  { value: "70+", label: "Members" },
-  { value: "20+", label: "Projects" },
+  { value: "70+", label: "Engineers" },
+  { value: "40+", label: "Projects" },
   { value: "7", label: "Years" },
 ];
 
