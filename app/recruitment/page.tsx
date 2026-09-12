@@ -116,8 +116,7 @@ const requirementItems = [
   },
 ];
 
-const mailingListUrl =
-  "https://docs.google.com/forms/d/e/1FAIpQLSfHy0G3zA2e1HIsOjGbkS08euM6FV3hWEwvxW7vGG_hPRf79g/viewform";
+const mailingListUrl = "https://duke.is/b/5q32";
 const aitpUrl = "https://duke-applied-machine-learning.github.io/aitp-website/";
 
 export default function Education() {

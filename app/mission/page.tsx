@@ -105,7 +105,7 @@ export default function MissionPage() {
           </p>
           <div className="mt-6">
             <Button asChild variant="cta">
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSfHy0G3zA2e1HIsOjGbkS08euM6FV3hWEwvxW7vGG_hPRf79g/viewform" target="_blank" rel="noopener noreferrer">Join DAML</a>
+              <a href="https://duke.is/b/5q32" target="_blank" rel="noopener noreferrer">Join DAML</a>
             </Button>
           </div>
         </div>

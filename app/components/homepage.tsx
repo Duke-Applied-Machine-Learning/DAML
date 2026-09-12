@@ -517,7 +517,7 @@ export default function Homepage() {
             text: "Join us",
             onClick: () => {
               if (typeof window !== "undefined") {
-                window.open("https://docs.google.com/forms/d/e/1FAIpQLSfHy0G3zA2e1HIsOjGbkS08euM6FV3hWEwvxW7vGG_hPRf79g/viewform?usp=dialog");
+                window.open("https://duke.is/b/5q32");
               }
             },
           }}
