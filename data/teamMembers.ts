@@ -12,9 +12,8 @@ export type TeamMember = {
 
 export const teamMembers: TeamMember[] = [
   // Executive
-  { id: "leader-1",  name: "Jai Kasera",        subsection: "Executive", projectStack: "Co-President",      imageUrl: "/headshots/Executive/jai.jpeg",      major: "Math, CS",              year: "2027" },
+  { id: "leader-1",  name: "Mayur Sekhar",      subsection: "Executive", projectStack: "Co-President",      imageUrl: "/headshots/Executive/mayur.jpg",     major: "Math, CS, AI Conc.",    year: "2027" },
   { id: "leader-7",  name: "Renzo Larrea",     subsection: "Executive", projectStack: "Co-President",               imageUrl: "/headshots/Executive/renzo.jpeg",    major: "Math, CS",              year: "2028" },
-  { id: "leader-2",  name: "Mayur Sekhar",      subsection: "Executive", projectStack: "Data Science Director",       imageUrl: "/headshots/Executive/mayur.jpg",     major: "Math, CS, AI Conc.",    year: "2027" },
   { id: "leader-3",  name: "Rithvik Neti",      subsection: "Executive", projectStack: "Data Science Director",           imageUrl: "/headshots/Executive/rithvik.jpeg",  major: "CS, Political Science", year: "2027" },
   { id: "leader-4",  name: "David Li",          subsection: "Executive", projectStack: "Head of Project Management",imageUrl: "/headshots/Executive/david.jpeg",    major: "CS, Econ",              year: "2028" },
   { id: "leader-5",  name: "Clara Bartusiak",   subsection: "Executive", projectStack: "Director of Outreach",     imageUrl: "/headshots/Executive/clara.jpg",     major: "ECE, CS",               year: "2027" },
@@ -28,8 +27,8 @@ export const teamMembers: TeamMember[] = [
   { id: "pm-6", name: "Ruben Marcus", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/PMs/Ruben_Marcus.jpg", major: "Math",     year: "2029" },
   { id: "pm-7", name: "Taylor Allen", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/PMs/Taylor_Allen.png", major: "MS in Statistical Science", year: "2027" },
   { id: "pm-8", name: "Emerson Cortazar", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/PMs/Emerson_Cortazar.jpg", major: "CS, Math", year: "2028"},
-  { id: "pm-8", name: "Jin Yoo", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/blank.jpg", major: "Undeclared",   year: "2029" },
-  { id: "pm-9", name: "Matthew Del Preto", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/blank.jpg", major: "CS, Math, Minor in Spanish",     year: "2029" },
+  { id: "pm-9", name: "Jin Yoo", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/blank.jpg", major: "Undeclared",   year: "2029" },
+  { id: "pm-10", name: "Matthew Del Preto", subsection: "PMs", projectStack: "Project Manager", imageUrl: "/headshots/blank.jpg", major: "CS, Math, Minor in Spanish",     year: "2029" },
   // Data Scientists (hidden until ready)
   // { id: "ds-1", name: "DS1", subsection: "Data Scientists", projectStack: "Python, PyTorch",        major: "CS",         year: "2026" },
   // { id: "ds-2", name: "DS2", subsection: "Data Scientists", projectStack: "scikit-learn, Pandas",   major: "Math & CS",  year: "2027" },
